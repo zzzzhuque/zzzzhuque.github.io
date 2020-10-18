@@ -173,7 +173,9 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="奇异值分解-SVD-singular-value-decomposition"><a href="#奇异值分解-SVD-singular-value-decomposition" class="headerlink" title="奇异值分解(SVD singular value decomposition)"></a>奇异值分解(SVD singular value decomposition)</h1><p>奇异值分解是线性代数中一种重要的矩阵分解方法，这篇文章通过一个具体的例子来说明如何对一个矩阵A进行奇异值分解。</p>
-<p>首先，对于一个m*n的矩阵，如果存在正交矩阵U(m*m阶)和V(n*n阶)，使得(1)式成立：<br>$$<br>A=U\Sigma V^{T}\tag{1}<br>$$<br>则将式(1)的过程称为奇异值分解，其中$\Sigma_{mn}=\begin{bmatrix}\Sigma_1 &amp; 0 \ 0 &amp; 0\end{bmatrix}$</p>
+<p>首先，对于一个m*n的矩阵，如果存在正交矩阵U(m*m阶)和V(n*n阶)，使得(1)式成立：$$A=U\Sigma V^{T}\tag{1}$$</p>
+<p>则将式(1)的过程称为奇异值分解，其中$\Sigma_{mn}=\begin{bmatrix}\Sigma_1 &amp; 0 \\ 0 &amp; 0\end{bmatrix}$，且$\Sigma_1=diag(\sigma_1,\sigma_1,\dots,\sigma_r)$，U和V分别称为A的<strong>左奇异</strong>向量矩阵和<strong>右奇异</strong>向量矩阵。下面用一个具体的例子来说明如何得到上述的分解。假设我们有一个矩阵$A=\begin{bmatrix} 1&amp;1\\1&amp;1\\0&amp;0\end{bmatrix}$</p>
+<h3 id="第一步计算左奇异向量矩阵U"><a href="#第一步计算左奇异向量矩阵U" class="headerlink" title="第一步计算左奇异向量矩阵U"></a>第一步计算左奇异向量矩阵U</h3><p>计算矩阵$AA^T=\begin{bmatrix} 2&amp;2&amp;0\\2&amp;2&amp;0\\0&amp;0&amp;0\end{bmatrix}$，对其进行特征分解，也就是计算特征值特征向量</p>
 <p><strong>reference</strong></p>
 <p>[1] <a target="_blank" rel="noopener" href="https://www.cnblogs.com/marsggbo/p/10155801.html">https://www.cnblogs.com/marsggbo/p/10155801.html</a></p>
 
