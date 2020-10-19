@@ -16,7 +16,7 @@
 <meta property="og:description" content="奇异值分解(SVD singular value decomposition)奇异值分解是线性代数中一种重要的矩阵分解方法，这篇文章通过一个具体的例子来说明如何对一个矩阵A进行奇异值分解。 首先，对于一个m*n的矩阵，如果存在正交矩阵U(m*m阶)和V(n*n阶)，使得(1)式成立：$$A&#x3D;U\Sigma V^{T}\tag{1}$$ 则将式(1)的过程称为奇异值分解，其中$\Sigma_{mn}">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-10-18T08:06:11.000Z">
-<meta property="article:modified_time" content="2020-10-18T09:40:10.492Z">
+<meta property="article:modified_time" content="2020-10-19T13:42:17.947Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="机器学习">
 <meta property="article:tag" content="svd">
@@ -178,8 +178,23 @@
       
         <h1 id="奇异值分解-SVD-singular-value-decomposition"><a href="#奇异值分解-SVD-singular-value-decomposition" class="headerlink" title="奇异值分解(SVD singular value decomposition)"></a>奇异值分解(SVD singular value decomposition)</h1><p>奇异值分解是线性代数中一种重要的矩阵分解方法，这篇文章通过一个具体的例子来说明如何对一个矩阵A进行奇异值分解。</p>
 <p>首先，对于一个m*n的矩阵，如果存在正交矩阵U(m*m阶)和V(n*n阶)，使得(1)式成立：$$A=U\Sigma V^{T}\tag{1}$$</p>
-<p>则将式(1)的过程称为奇异值分解，其中$\Sigma_{mn}=\begin{bmatrix}\Sigma_1 &amp; 0 \\ 0 &amp; 0\end{bmatrix}$，且$\Sigma_1=diag(\sigma_1,\sigma_1,\dots,\sigma_r)$，U和V分别称为A的<strong>左奇异</strong>向量矩阵和<strong>右奇异</strong>向量矩阵。下面用一个具体的例子来说明如何得到上述的分解。假设我们有一个矩阵$A=\begin{bmatrix} 1&amp;1\\1&amp;1\\0&amp;0\end{bmatrix}$</p>
-<h3 id="第一步计算左奇异向量矩阵U"><a href="#第一步计算左奇异向量矩阵U" class="headerlink" title="第一步计算左奇异向量矩阵U"></a>第一步计算左奇异向量矩阵U</h3><p>计算矩阵$AA^T=\begin{bmatrix} 2&amp;2&amp;0\\2&amp;2&amp;0\\0&amp;0&amp;0\end{bmatrix}$，对其进行特征分解，也就是计算特征值特征向量</p>
+<p>则将式(1)的过程称为奇异值分解，其中$\Sigma_{mn}=\begin{bmatrix}\Sigma_1 &amp; 0 \\ 0 &amp; 0\end{bmatrix}$，且$\Sigma_1=diag(\sigma_1,\sigma_1,\dots,\sigma_r)$，U和V分别称为A的<strong>左奇异</strong>向量矩阵和<strong>右奇异</strong>向量矩阵，且均为酉矩阵(即满足$AA_{T}=E$的矩阵)。下面用一个具体的例子来说明如何得到上述的分解。假设我们有一个矩阵$A=\begin{bmatrix} 1&amp;1\\1&amp;1\\0&amp;0\end{bmatrix}$</p>
+<h3 id="第一步计算左奇异向量矩阵U"><a href="#第一步计算左奇异向量矩阵U" class="headerlink" title="第一步计算左奇异向量矩阵U"></a>第一步计算左奇异向量矩阵U</h3><p>计算矩阵$AA^T=\begin{bmatrix} 2&amp;2&amp;0\\2&amp;2&amp;0\\0&amp;0&amp;0\end{bmatrix}$，对其进行特征分解，也就是计算特征值特征向量。</p>
+<p><strong>step1</strong>：求特征值</p>
+<p>$\left | \lambda E-A \right |=0$</p>
+<p>$\begin{vmatrix}<br>\lambda -2 &amp; -2 &amp; 0 \\<br>-2 &amp; \lambda -2 &amp; 0 \\<br>0 &amp; 0 &amp; \lambda<br>\end{vmatrix}=\lambda \times (-1)^{3 \times 3}\begin{vmatrix}<br>\lambda-2 &amp; -2 \\<br>-2 &amp; \lambda-2<br>\end{vmatrix}$将行列式按第三行展开，乘上其代数余子式，展开计算后可得$\lambda_{1}=\lambda_{2}=0,\lambda_{3}=4$</p>
+<p><strong>step2</strong>：求特征向量</p>
+<p>情况1：$\lambda_{1}=\lambda_{2}=0$</p>
+<p>$\lambda E-A\alpha =0$解一个齐次线性方程组</p>
+<p>$\lambda E-A=\begin{pmatrix}<br>-2 &amp; -2 &amp; 0 \\<br>-2 &amp; -2 &amp; 0 \\<br>0 &amp; 0 &amp; 0<br>\end{pmatrix}$将该矩阵通过初等行变换化为行简化阶梯形矩阵。</p>
+<p>$\begin{pmatrix}<br>-2 &amp; -2 &amp; 0 \\<br>-2 &amp; -2 &amp; 0 \\<br>0 &amp; 0 &amp; 0<br>\end{pmatrix}-&gt;\begin{pmatrix}<br>-2 &amp; -2 &amp; 0 \\<br>-2 &amp; -2 &amp; 0 \\<br>0 &amp; 0 &amp; 0<br>\end{pmatrix}-&gt;\begin{pmatrix}<br>1 &amp; 1 &amp; 0 \\<br>0 &amp; 0 &amp; 0 \\<br>0 &amp; 0 &amp; 0<br>\end{pmatrix}$</p>
+<p>矩阵1到矩阵2的操作为将第二行减去第一行，矩阵2到矩阵3的操作为将第一行乘以-0.5，得到方程$x_{1}=-x_{2}$，其中$x_{2},x_{3}$为自由未知量，取$\begin{pmatrix}<br>x_{2}\\<br>x_{3}<br>\end{pmatrix}=\begin{pmatrix}<br>1\\<br>0<br>\end{pmatrix},\begin{pmatrix}<br>0\\<br>1<br>\end{pmatrix}$得特征向量$\begin{pmatrix}<br>-1\\<br>1\\<br>0<br>\end{pmatrix},\begin{pmatrix}<br>0\\<br>0\\<br>1<br>\end{pmatrix}$，还需要化为单位向量，得$\begin{pmatrix}<br>\frac{-1}{\sqrt{2}}\\<br>\frac{1}{\sqrt{2}}\\<br>0<br>\end{pmatrix},\begin{pmatrix}<br>0\\<br>0\\<br>1<br>\end{pmatrix}$</p>
+<p>情况2：$\lambda_{3}=4$</p>
+<p>参考情况1的解法可得对应的特征向量为$\begin{pmatrix}<br>\frac{1}{\sqrt{2}}\\<br>\frac{1}{\sqrt{2}}\\<br>0<br>\end{pmatrix},\begin{pmatrix}<br>0\\<br>0\\<br>1<br>\end{pmatrix}$</p>
+<p>接下来按照<strong>特征值从大到小排列</strong>对应的特征向量构成左奇异向量矩阵，注意特征向量均为列向量，在矩阵中按列排。可以得到$\begin{pmatrix}<br>\frac{1}{\sqrt{2}} &amp; \frac{-1}{\sqrt{2}} &amp; 0 \\<br>\frac{1}{\sqrt{2}} &amp; \frac{1}{\sqrt{2}} &amp; 0 \\<br>0 &amp; 0 &amp; 1<br>\end{pmatrix}$或$\begin{pmatrix}<br>\frac{1}{\sqrt{2}} &amp; 0 &amp; \frac{-1}{\sqrt{2}} \\<br>\frac{1}{\sqrt{2}} &amp; 0 &amp; \frac{1}{\sqrt{2}} \\<br>0 &amp; 1 &amp; 0<br>\end{pmatrix}$或$\begin{pmatrix}<br>0 &amp; \frac{1}{\sqrt{2}} &amp; \frac{-1}{\sqrt{2}} \\<br>0 &amp; \frac{1}{\sqrt{2}} &amp; \frac{1}{\sqrt{2}} \\<br>1 &amp; 0 &amp; 0<br>\end{pmatrix}$。第三个矩阵是错误的，因为三个特征值(其中两个是重根)，对应三个特征向量，其中$\begin{pmatrix}<br>0\\<br>0\\<br>1<br>\end{pmatrix}$在这里不属于$\lambda_{3}$，并且第一个矩阵的写法更好，因为有内容的向量均集中在左上角，有利于压缩。</p>
+<h3 id="第二步计算非负实数对角矩阵sigma"><a href="#第二步计算非负实数对角矩阵sigma" class="headerlink" title="第二步计算非负实数对角矩阵sigma"></a>第二步计算非负实数对角矩阵sigma</h3><p>计算$\Sigma_{mn}=\begin{bmatrix}\Sigma_1 &amp; 0 \\ 0 &amp; 0\end{bmatrix}$，其中$\Sigma_1=diag(\sigma_1,\sigma_1,\dots,\sigma_r)$是将第一步求出的<strong>非零特征值从大到小排列后开根号</strong>的值，这里$\Sigma=\begin{bmatrix} 2&amp;0 \\ 0&amp;0 \\ 0&amp;0 \end{bmatrix}$。</p>
+<h3 id="第三步计算右奇异向量矩阵V"><a href="#第三步计算右奇异向量矩阵V" class="headerlink" title="第三步计算右奇异向量矩阵V"></a>第三步计算右奇异向量矩阵V</h3><p>补充一个知识点$AA^{T}=A^{T}A$有相同的特征值。参照第一步的计算方法，可直接计算特征向量，并得到右奇异向量矩阵为$\begin{pmatrix}<br>\frac{1}{\sqrt{2}} &amp; \frac{-1}{\sqrt{2}} \\<br>\frac{1}{\sqrt{2}} &amp; \frac{1}{\sqrt{2}}<br>\end{pmatrix}$</p>
+<p>最终，我们可以得到A的奇异值分解$$A=U \Sigma V^T= \begin{bmatrix} \frac{1}{\sqrt{2}}&amp;-\frac{1}{\sqrt{2}}&amp;0 \\ \frac{1}{\sqrt{2}}&amp;\frac{1}{\sqrt{2}}&amp;0 \\ 0&amp;0&amp;1 \end{bmatrix} \begin{bmatrix} 2&amp;0 \\ 0&amp;0 \\ 0&amp;0 \end{bmatrix} {\begin{bmatrix} \frac{1}{\sqrt{2}}&amp;-\frac{1}{\sqrt{2}} \\ \frac{1}{\sqrt{2}}&amp;\frac{1}{\sqrt{2}}\end{bmatrix}}^T=\begin{bmatrix} 1&amp;1\\1&amp;1\\0&amp;0\end{bmatrix}$$</p>
 <p><strong>reference</strong></p>
 <p>[1] <a target="_blank" rel="noopener" href="https://www.cnblogs.com/marsggbo/p/10155801.html">https://www.cnblogs.com/marsggbo/p/10155801.html</a></p>
 
