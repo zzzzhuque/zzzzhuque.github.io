@@ -6,18 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Hello World | Hexo</title>
+  <title>二叉树遍历 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+  <meta name="description" content="二叉树遍历总结123456789struct TreeNode &amp;#123;    int val;    TreeNode *left;    TreeNode *right;    TreeNode() : val(0), left(nullptr), right(nullptr) &amp;#123;&amp;#125;    TreeNode(int x) : val(x), left(nullptr),">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://example.com/2020/10/07/hello-world/index.html">
+<meta property="og:title" content="二叉树遍历">
+<meta property="og:url" content="http://example.com/2020/12/03/%E4%BA%8C%E5%8F%89%E6%A0%91%E9%81%8D%E5%8E%86/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="二叉树遍历总结123456789struct TreeNode &amp;#123;    int val;    TreeNode *left;    TreeNode *right;    TreeNode() : val(0), left(nullptr), right(nullptr) &amp;#123;&amp;#125;    TreeNode(int x) : val(x), left(nullptr),">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-10-07T08:05:26.120Z">
-<meta property="article:modified_time" content="2020-10-07T08:05:26.120Z">
+<meta property="article:published_time" content="2020-12-03T12:03:13.000Z">
+<meta property="article:modified_time" content="2020-12-03T13:27:13.168Z">
 <meta property="article:author" content="John Doe">
+<meta property="article:tag" content="数据结构">
+<meta property="article:tag" content="二叉树">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -154,40 +156,37 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-hello-world" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-二叉树遍历" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Hello World
+      二叉树遍历
     </h1>
   
 
         
-        <a href="/2020/10/07/hello-world/" class="archive-article-date">
-  	<time datetime="2020-10-07T08:05:26.120Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-07</time>
+        <a href="/2020/12/03/%E4%BA%8C%E5%8F%89%E6%A0%91%E9%81%8D%E5%8E%86/" class="archive-article-date">
+  	<time datetime="2020-12-03T12:03:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-03</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+        <h1 id="二叉树遍历总结"><a href="#二叉树遍历总结" class="headerlink" title="二叉树遍历总结"></a>二叉树遍历总结</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> val;</span><br><span class="line">    TreeNode *left;</span><br><span class="line">    TreeNode *right;</span><br><span class="line"></span><br><span class="line">    TreeNode() : val(<span class="number">0</span>), left(<span class="literal">nullptr</span>), right(<span class="literal">nullptr</span>) &#123;&#125;</span><br><span class="line">    TreeNode(<span class="keyword">int</span> x) : val(x), left(<span class="literal">nullptr</span>), right(<span class="literal">nullptr</span>) &#123;&#125;</span><br><span class="line">    TreeNode(<span class="keyword">int</span> x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<h2 id="非递归遍历法"><a href="#非递归遍历法" class="headerlink" title="非递归遍历法"></a>非递归遍历法</h2><h3 id="前序遍历"><a href="#前序遍历" class="headerlink" title="前序遍历"></a>前序遍历</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">preorderTraversal</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; res;</span><br><span class="line">    <span class="keyword">if</span> (!root) &#123;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">stack</span>&lt;TreeNode*&gt; stk;</span><br><span class="line">    TreeNode *node = root;</span><br><span class="line">    <span class="keyword">while</span>(!stk.empty() || node!=<span class="literal">nullptr</span>) &#123;</span><br><span class="line">        <span class="keyword">while</span>(node != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">            res.push_back(node-&gt;val);</span><br><span class="line">            stk.push(node);</span><br><span class="line">            node = node-&gt;left;</span><br><span class="line">        &#125;</span><br><span class="line">        node = stk.top();</span><br><span class="line">        stk.pop();</span><br><span class="line">        node = node-&gt;right;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<h3 id="中序遍历"><a href="#中序遍历" class="headerlink" title="中序遍历"></a>中序遍历</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">inorderTraversal</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; res;</span><br><span class="line">    <span class="keyword">if</span>(!root) &#123;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">stack</span>&lt;TreeNode*&gt; stk;</span><br><span class="line">    TreeNode *node = root;</span><br><span class="line">    <span class="keyword">while</span> (!stk.empty() || node!=<span class="literal">nullptr</span>) &#123;</span><br><span class="line">        <span class="comment">// 左</span></span><br><span class="line">        <span class="keyword">while</span> (node != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">            stk.push(node);</span><br><span class="line">            node = node-&gt;left;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 根</span></span><br><span class="line">        node = stk.top();</span><br><span class="line">        stk.pop();</span><br><span class="line">        res.push_back(node-&gt;val);</span><br><span class="line">        <span class="comment">// 右</span></span><br><span class="line">        node = node-&gt;right;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<h3 id="后序遍历"><a href="#后序遍历" class="headerlink" title="后序遍历"></a>后序遍历</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">postorderTraversal</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; res;</span><br><span class="line">    <span class="keyword">if</span> (root == <span class="literal">nullptr</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">stack</span>&lt;TreeNode *&gt; stk;</span><br><span class="line">    TreeNode *node = root;</span><br><span class="line">    TreeNode *prev = <span class="literal">nullptr</span>;</span><br><span class="line">    <span class="keyword">while</span> (!stk.empty() || node != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">        <span class="comment">// 1.左</span></span><br><span class="line">        <span class="keyword">while</span> (node != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">            stk.push(node);</span><br><span class="line">            node = node-&gt;left;</span><br><span class="line">        &#125;</span><br><span class="line">        node = stk.top();</span><br><span class="line">        stk.pop();</span><br><span class="line">        <span class="keyword">if</span> (node-&gt;right == <span class="literal">nullptr</span> || node-&gt;right == prev) &#123;</span><br><span class="line">            <span class="comment">// 为了效率，这个判断条件顺序不能换，先判断右侧是否为空也符合直觉</span></span><br><span class="line">            <span class="comment">// 虽然节点右边不为空，但是右边已经遍历过</span></span><br><span class="line">            <span class="comment">// 3.根</span></span><br><span class="line">            res.push_back(node-&gt;val);</span><br><span class="line">            prev = node;</span><br><span class="line">            node = <span class="literal">nullptr</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;    <span class="comment">// 发现右边还有，这个节点就得重新放回去</span></span><br><span class="line">            <span class="comment">// 2.右</span></span><br><span class="line">            stk.push(node);</span><br><span class="line">            node = node-&gt;right;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<h3 id="模板"><a href="#模板" class="headerlink" title="模板"></a>模板</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">traversal</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; res;</span><br><span class="line">    <span class="keyword">if</span>(!root) &#123;	  <span class="comment">// 若树为空</span></span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">stack</span>&lt;TreeNode*&gt; stk;</span><br><span class="line">    TreeNode *node = root;</span><br><span class="line">    <span class="comment">// TreeNode *prev = nullptr;</span></span><br><span class="line">    <span class="comment">// 后序遍历需要多定义一个当前节点之前的节点，用于判断右侧节点是否来过</span></span><br><span class="line">    <span class="keyword">while</span>(!stk.empty() || node!=<span class="literal">nullptr</span>) &#123;</span><br><span class="line">        <span class="keyword">while</span>(node != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">            <span class="comment">// res.push_back(node-&gt;val);	// 前序遍历在这里记录节点值</span></span><br><span class="line">            stk.push(node);</span><br><span class="line">            node = node-&gt;left;</span><br><span class="line">        &#125;</span><br><span class="line">        node = stk.top();</span><br><span class="line">        stk.pop();</span><br><span class="line">        <span class="comment">// res.push_back(node-&gt;val);	// 中序遍历在这里记录节点值</span></span><br><span class="line">        <span class="comment">// *************在这里分叉*********** //</span></span><br><span class="line">        <span class="comment">// ***********前序&amp;中序遍历********** //</span></span><br><span class="line">        node = node-&gt;right;</span><br><span class="line">        <span class="comment">// *************后序遍历************ //</span></span><br><span class="line">        <span class="keyword">if</span>(node-&gt;right==<span class="literal">nullptr</span> || node-&gt;right==prev) &#123;</span><br><span class="line">            <span class="comment">// 右边没有或者去过了，记录节点值，同时把这个节点去掉</span></span><br><span class="line">            res.push_back(node-&gt;val);</span><br><span class="line">            prev = node;</span><br><span class="line">            node = <span class="literal">nullptr</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            stk.push(node);<span class="comment">// 右边还有，把根节点重新放回去，并把node移到右边</span></span><br><span class="line">            node = node-&gt;right;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<h2 id="递归遍历法"><a href="#递归遍历法" class="headerlink" title="递归遍历法"></a>递归遍历法</h2>
       
 
       
@@ -216,6 +215,21 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">二叉树</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -266,7 +280,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2020/10/07/hello-world/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2020/12/03/%E4%BA%8C%E5%8F%89%E6%A0%91%E9%81%8D%E5%8E%86/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -280,15 +294,11 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/10/07/my-first-blog/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          My First Blog
-        
-      </div>
-    </a>
   
+    <a href="/2020/10/18/svd/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">从svd到推荐系统</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
 </nav>
 
