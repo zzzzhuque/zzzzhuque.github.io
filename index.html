@@ -152,6 +152,129 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-LaTeX" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/12/07/LaTeX/">LaTeX的安装和使用</a>
+    </h1>
+  
+
+        
+        <a href="/2020/12/07/LaTeX/" class="archive-article-date">
+  	<time datetime="2020-12-07T08:11:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本文主要记录在Mac上结合VSCode使用LaTeX的过程</p>
+<h1 id="安装MaxTeX"><a href="#安装MaxTeX" class="headerlink" title="安装MaxTeX"></a>安装MaxTeX</h1><p>Mac版本的TeX下载地址为</p>
+<p><a target="_blank" rel="noopener" href="http://www.tug.org/mactex/mactex-download.html">http://www.tug.org/mactex/mactex-download.html</a></p>
+<p>点击MacTeX.pkg完成安装，最新版本的MacTeX仅包含<code>LaTeXiT</code>和<code>TeXShop</code>两个APP</p>
+<h1 id="配置VSCode"><a href="#配置VSCode" class="headerlink" title="配置VSCode"></a>配置VSCode</h1><p>点击VSCode左下角的齿轮按钮，进入<code>Settings</code>界面，点击右上角<code>Open Setting(JSON)</code>，在<code>settings.json</code>中加入如下配置</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="comment">// Latex workshop</span></span><br><span class="line">    <span class="attr">&quot;latex-workshop.latex.tools&quot;</span>: [</span><br><span class="line">          &#123;</span><br><span class="line">            <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;latexmk&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;command&quot;</span>: <span class="string">&quot;latexmk&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;args&quot;</span>: [</span><br><span class="line">            <span class="string">&quot;-synctex=1&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-interaction=nonstopmode&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-file-line-error&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-pdf&quot;</span>,</span><br><span class="line">            <span class="string">&quot;%DOC%&quot;</span></span><br><span class="line">            ]</span><br><span class="line">          &#125;,</span><br><span class="line">          &#123;</span><br><span class="line">            <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;xelatex&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;command&quot;</span>: <span class="string">&quot;xelatex&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;args&quot;</span>: [</span><br><span class="line">            <span class="string">&quot;-synctex=1&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-interaction=nonstopmode&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-file-line-error&quot;</span>,</span><br><span class="line">            <span class="string">&quot;%DOC%&quot;</span></span><br><span class="line">              ]</span><br><span class="line">          &#125;,          </span><br><span class="line">          &#123;</span><br><span class="line">            <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;pdflatex&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;command&quot;</span>: <span class="string">&quot;pdflatex&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;args&quot;</span>: [</span><br><span class="line">            <span class="string">&quot;-synctex=1&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-interaction=nonstopmode&quot;</span>,</span><br><span class="line">            <span class="string">&quot;-file-line-error&quot;</span>,</span><br><span class="line">            <span class="string">&quot;%DOC%&quot;</span></span><br><span class="line">            ]</span><br><span class="line">          &#125;,</span><br><span class="line">          &#123;</span><br><span class="line">            <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;bibtex&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;command&quot;</span>: <span class="string">&quot;bibtex&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;args&quot;</span>: [</span><br><span class="line">            <span class="string">&quot;%DOCFILE%&quot;</span></span><br><span class="line">            ]</span><br><span class="line">          &#125;</span><br><span class="line">        ],</span><br><span class="line">    <span class="attr">&quot;latex-workshop.latex.recipes&quot;</span>: [</span><br><span class="line">          &#123;</span><br><span class="line">            <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;xelatex&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;tools&quot;</span>: [</span><br><span class="line">            <span class="string">&quot;xelatex&quot;</span></span><br><span class="line">                        ]</span><br><span class="line">                  &#125;,</span><br><span class="line">          &#123;</span><br><span class="line">            <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;latexmk&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;tools&quot;</span>: [</span><br><span class="line">            <span class="string">&quot;latexmk&quot;</span></span><br><span class="line">                        ]</span><br><span class="line">          &#125;,</span><br><span class="line"></span><br><span class="line">          &#123;</span><br><span class="line">            <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;pdflatex -&gt; bibtex -&gt; pdflatex*2&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;tools&quot;</span>: [</span><br><span class="line">            <span class="string">&quot;pdflatex&quot;</span>,</span><br><span class="line">            <span class="string">&quot;bibtex&quot;</span>,</span><br><span class="line">            <span class="string">&quot;pdflatex&quot;</span>,</span><br><span class="line">            <span class="string">&quot;pdflatex&quot;</span></span><br><span class="line">                        ]</span><br><span class="line">          &#125;</span><br><span class="line">        ],</span><br><span class="line">    <span class="attr">&quot;latex-workshop.view.pdf.viewer&quot;</span>: <span class="string">&quot;VSCode tab&quot;</span>,  </span><br><span class="line">    <span class="attr">&quot;latex-workshop.latex.clean.fileTypes&quot;</span>: [</span><br><span class="line">        <span class="string">&quot;*.aux&quot;</span>,</span><br><span class="line">        <span class="string">&quot;*.bbl&quot;</span>,</span><br><span class="line">        <span class="string">&quot;*.blg&quot;</span>,</span><br><span class="line">        <span class="string">&quot;*.idx&quot;</span>,</span><br><span class="line">        <span class="string">&quot;*.ind&quot;</span>,</span><br><span class="line">        <span class="string">&quot;*.lof&quot;</span>,</span><br><span class="line">        <span class="string">&quot;*.lot&quot;</span>,</span><br><span class="line">        <span class="string">&quot;*.out&quot;</span>,</span><br><span class="line">        <span class="string">&quot;*.toc&quot;</span>,</span><br><span class="line">        <span class="string">&quot;*.acn&quot;</span>,</span><br><span class="line">        <span class="string">&quot;*.acr&quot;</span>,</span><br><span class="line">        <span class="string">&quot;*.alg&quot;</span>,</span><br><span class="line">        <span class="string">&quot;*.glg&quot;</span>,</span><br><span class="line">        <span class="string">&quot;*.glo&quot;</span>,</span><br><span class="line">        <span class="string">&quot;*.gls&quot;</span>,</span><br><span class="line">        <span class="string">&quot;*.ist&quot;</span>,</span><br><span class="line">        <span class="string">&quot;*.fls&quot;</span>,</span><br><span class="line">        <span class="string">&quot;*.log&quot;</span>,</span><br><span class="line">        <span class="string">&quot;*.fdb_latexmk&quot;</span></span><br><span class="line">      ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>会下载一些包，时间会比较久，下载完成后，重启VSCode后左侧工具栏多了一个TeX选项，通过<code>Build LaTeX project</code>编译生成PDF文件，可能会遭遇如下错误</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mac vscode Recipe terminated with fatal error: spawn latexmk ENOENT.</span><br></pre></td></tr></table></figure>
+
+<p>这是由于VSCode环境变量没有配置好。配置步骤如下</p>
+<h4 id="校验"><a href="#校验" class="headerlink" title="校验"></a>校验</h4><p>1.打开终端程序，比如 Terminal, iTerm 或者 Hyper</p>
+<p>2.输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">code .</span><br></pre></td></tr></table></figure>
+
+<p>3.如果 打开了 vscode，就是配置好</p>
+<p>   如果 显示一些错误信息，就是没有配置好</p>
+<h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><p>1.打开 vscode</p>
+<p>2.按 ⌘ command + ⇧ shift + P</p>
+<p>你会在输入框看到</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+
+<p>不要删除它</p>
+<p>3.在它后面接着敲</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">path</span><br></pre></td></tr></table></figure>
+
+<p>4.然后你可以找到一个选项叫</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Shell Command: Install &#39;code&#39; command in PATH </span><br></pre></td></tr></table></figure>
+
+<p>5.鼠标点击它 或者 键盘选择中后按回车</p>
+<p>6.重启VSCode，完成</p>
+<h1 id="LaTeX语法"><a href="#LaTeX语法" class="headerlink" title="LaTeX语法"></a>LaTeX语法</h1><h3 id="中文支持"><a href="#中文支持" class="headerlink" title="中文支持"></a>中文支持</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">%!TEX TS-program &#x3D; xelatex</span><br><span class="line"></span><br><span class="line">%!TEX encoding &#x3D; UTF-8 Unicode</span><br><span class="line"></span><br><span class="line">\usepackage&#123;ctex&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在文件开头加入两行注释并导入ctex包</p>
+<h3 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h3><p>LaTeX Workshop 的常用快捷键：</p>
+<ul>
+<li><code>Command + option + B</code>：编译</li>
+<li><code>Command + option + C</code>：清除 auxiliary 文件</li>
+<li><code>Command + option + V</code>：打开 PDF 预览</li>
+<li>正向和反向定位跳转<ul>
+<li>在 LaTeX 文件中，按 <code>Command + option + J</code> 跳转到对应的 PDF 文件位置。</li>
+<li>在 PDF 文件中，按下 <code>Command + ←</code> 同时鼠标单机，跳转到对应的 LaTeX 文件位置。</li>
+</ul>
+</li>
+</ul>
+<p>反向跳转比较奇葩，经常跳转到 LaTeX 文件后会会激活 <code>Command + ←</code> 的另一项功能——跳转到上一单词</p>
+<h3 id="添加章节"><a href="#添加章节" class="headerlink" title="添加章节"></a>添加章节</h3><figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">\<span class="name">section</span><span class="string">&#123;&#125;</span></span> </span><br><span class="line"><span class="tag">\<span class="name">subsection</span><span class="string">&#123;&#125;</span></span> </span><br><span class="line"><span class="tag">\<span class="name">subsubsection</span><span class="string">&#123;&#125;</span></span></span><br></pre></td></tr></table></figure>
+
+<h3 id="添加段落"><a href="#添加段落" class="headerlink" title="添加段落"></a>添加段落</h3><figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">\<span class="name">paragraph</span><span class="string">&#123;&#125;</span></span> </span><br><span class="line"><span class="tag">\<span class="name">subparagraph</span><span class="string">&#123;&#125;</span></span> </span><br><span class="line"><span class="tag">\<span class="name">subsubparagraph</span><span class="string">&#123;&#125;</span></span></span><br><span class="line"><span class="comment">% \paragraph&#123;&#125;~&#123;&#125;\newline可换行</span></span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">LaTeX</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/12/07/LaTeX/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-二叉树遍历" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -629,6 +752,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">二叉树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">LaTeX</a>
               </li>
             
             <div class="clearfix"></div>
