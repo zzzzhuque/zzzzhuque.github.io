@@ -6,20 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>从svd到推荐系统 | Hexo</title>
+  <title>回溯算法概念 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="奇异值分解(SVD singular value decomposition)奇异值分解是线性代数中一种重要的矩阵分解方法，这篇文章通过一个具体的例子来说明如何对一个矩阵A进行奇异值分解。 首先，对于一个m*n的矩阵，如果存在正交矩阵U(m*m阶)和V(n*n阶)，使得(1)式成立：$$A&#x3D;U\Sigma V^{T}\tag{1}$$ 则将式(1)的过程称为奇异值分解，其中$\Sigma_{mn}">
+  <meta name="description" content="声明：本文重度参考了公众号「代码随想录」的文章 回溯算法的概念回溯法也可以叫做回溯搜索法，是一种搜索方式。 在二叉树当中有大量回溯算法的应用，例如二叉树：以为使用了递归，其实还隐藏着回溯这部分知识我还没有仔细整理，挖坑… 回溯是递归的副产品，只要有递归就会有回溯。 🔥回溯函数也就是递归函数，指的是一个函数。 回溯算法的效率回溯算法不是高效的算法，因为回溯的本质是穷举，一般可通过剪枝操作提升一定的">
 <meta property="og:type" content="article">
-<meta property="og:title" content="从svd到推荐系统">
-<meta property="og:url" content="http://example.com/2020/10/18/svd/index.html">
+<meta property="og:title" content="回溯算法概念">
+<meta property="og:url" content="http://example.com/2021/02/04/%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95%E6%A6%82%E5%BF%B5/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="奇异值分解(SVD singular value decomposition)奇异值分解是线性代数中一种重要的矩阵分解方法，这篇文章通过一个具体的例子来说明如何对一个矩阵A进行奇异值分解。 首先，对于一个m*n的矩阵，如果存在正交矩阵U(m*m阶)和V(n*n阶)，使得(1)式成立：$$A&#x3D;U\Sigma V^{T}\tag{1}$$ 则将式(1)的过程称为奇异值分解，其中$\Sigma_{mn}">
+<meta property="og:description" content="声明：本文重度参考了公众号「代码随想录」的文章 回溯算法的概念回溯法也可以叫做回溯搜索法，是一种搜索方式。 在二叉树当中有大量回溯算法的应用，例如二叉树：以为使用了递归，其实还隐藏着回溯这部分知识我还没有仔细整理，挖坑… 回溯是递归的副产品，只要有递归就会有回溯。 🔥回溯函数也就是递归函数，指的是一个函数。 回溯算法的效率回溯算法不是高效的算法，因为回溯的本质是穷举，一般可通过剪枝操作提升一定的">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-10-18T08:06:11.000Z">
-<meta property="article:modified_time" content="2020-10-23T07:39:31.976Z">
+<meta property="article:published_time" content="2021-02-04T07:21:00.000Z">
+<meta property="article:modified_time" content="2021-02-04T08:00:10.719Z">
 <meta property="article:author" content="John Doe">
-<meta property="article:tag" content="机器学习">
-<meta property="article:tag" content="svd">
+<meta property="article:tag" content="回溯算法">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -156,48 +155,68 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-svd" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-回溯算法概念" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      从svd到推荐系统
+      回溯算法概念
     </h1>
   
 
         
-        <a href="/2020/10/18/svd/" class="archive-article-date">
-  	<time datetime="2020-10-18T08:06:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-18</time>
+        <a href="/2021/02/04/%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95%E6%A6%82%E5%BF%B5/" class="archive-article-date">
+  	<time datetime="2021-02-04T07:21:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-04</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="奇异值分解-SVD-singular-value-decomposition"><a href="#奇异值分解-SVD-singular-value-decomposition" class="headerlink" title="奇异值分解(SVD singular value decomposition)"></a>奇异值分解(SVD singular value decomposition)</h1><p>奇异值分解是线性代数中一种重要的矩阵分解方法，这篇文章通过一个具体的例子来说明如何对一个矩阵A进行奇异值分解。</p>
-<p>首先，对于一个m*n的矩阵，如果存在正交矩阵U(m*m阶)和V(n*n阶)，使得(1)式成立：$$A=U\Sigma V^{T}\tag{1}$$</p>
-<p>则将式(1)的过程称为奇异值分解，其中$\Sigma_{mn}=\begin{bmatrix}\Sigma_1 &amp; 0 \\ 0 &amp; 0\end{bmatrix}$，且$\Sigma_1=diag(\sigma_1,\sigma_1,\dots,\sigma_r)$，U和V分别称为A的<strong>左奇异</strong>向量矩阵和<strong>右奇异</strong>向量矩阵，且均为酉矩阵(即满足$AA_{T}=E$的矩阵)。下面用一个具体的例子来说明如何得到上述的分解。假设我们有一个矩阵$A=\begin{bmatrix} 1&amp;1\\1&amp;1\\0&amp;0\end{bmatrix}$</p>
-<h3 id="第一步计算左奇异向量矩阵U"><a href="#第一步计算左奇异向量矩阵U" class="headerlink" title="第一步计算左奇异向量矩阵U"></a>第一步计算左奇异向量矩阵U</h3><p>计算矩阵$AA^T=\begin{bmatrix} 2&amp;2&amp;0\\2&amp;2&amp;0\\0&amp;0&amp;0\end{bmatrix}$，对其进行特征分解，也就是计算特征值特征向量。</p>
-<p><strong>step1</strong>：求特征值</p>
-<p>$\left | \lambda E-A \right |=0$</p>
-<p>$\begin{vmatrix}<br>\lambda -2 &amp; -2 &amp; 0 \\<br>-2 &amp; \lambda -2 &amp; 0 \\<br>0 &amp; 0 &amp; \lambda<br>\end{vmatrix}=\lambda \times (-1)^{3 \times 3}\begin{vmatrix}<br>\lambda-2 &amp; -2 \\<br>-2 &amp; \lambda-2<br>\end{vmatrix}$将行列式按第三行展开，乘上其代数余子式，展开计算后可得$\lambda_{1}=\lambda_{2}=0,\lambda_{3}=4$</p>
-<p><strong>step2</strong>：求特征向量</p>
-<p>情况1：$\lambda_{1}=\lambda_{2}=0$</p>
-<p>$\lambda E-A\alpha =0$解一个齐次线性方程组</p>
-<p>$\lambda E-A=\begin{pmatrix}<br>-2 &amp; -2 &amp; 0 \\<br>-2 &amp; -2 &amp; 0 \\<br>0 &amp; 0 &amp; 0<br>\end{pmatrix}$将该矩阵通过初等行变换化为行简化阶梯形矩阵。</p>
-<p>$\begin{pmatrix}<br>-2 &amp; -2 &amp; 0 \\<br>-2 &amp; -2 &amp; 0 \\<br>0 &amp; 0 &amp; 0<br>\end{pmatrix}-&gt;\begin{pmatrix}<br>-2 &amp; -2 &amp; 0 \\<br>-2 &amp; -2 &amp; 0 \\<br>0 &amp; 0 &amp; 0<br>\end{pmatrix}-&gt;\begin{pmatrix}<br>1 &amp; 1 &amp; 0 \\<br>0 &amp; 0 &amp; 0 \\<br>0 &amp; 0 &amp; 0<br>\end{pmatrix}$</p>
-<p>矩阵1到矩阵2的操作为将第二行减去第一行，矩阵2到矩阵3的操作为将第一行乘以-0.5，得到方程$x_{1}=-x_{2}$，其中$x_{2},x_{3}$为自由未知量，取$\begin{pmatrix}<br>x_{2}\\<br>x_{3}<br>\end{pmatrix}=\begin{pmatrix}<br>1\\<br>0<br>\end{pmatrix},\begin{pmatrix}<br>0\\<br>1<br>\end{pmatrix}$得特征向量$\begin{pmatrix}<br>-1\\<br>1\\<br>0<br>\end{pmatrix},\begin{pmatrix}<br>0\\<br>0\\<br>1<br>\end{pmatrix}$，还需要化为单位向量，得$\begin{pmatrix}<br>\frac{-1}{\sqrt{2}}\\<br>\frac{1}{\sqrt{2}}\\<br>0<br>\end{pmatrix},\begin{pmatrix}<br>0\\<br>0\\<br>1<br>\end{pmatrix}$</p>
-<p>情况2：$\lambda_{3}=4$</p>
-<p>参考情况1的解法可得对应的特征向量为$\begin{pmatrix}<br>\frac{1}{\sqrt{2}}\\<br>\frac{1}{\sqrt{2}}\\<br>0<br>\end{pmatrix},\begin{pmatrix}<br>0\\<br>0\\<br>1<br>\end{pmatrix}$</p>
-<p>接下来按照<strong>特征值从大到小排列</strong>对应的特征向量构成左奇异向量矩阵，注意特征向量均为列向量，在矩阵中按列排。可以得到$\begin{pmatrix}<br>\frac{1}{\sqrt{2}} &amp; \frac{-1}{\sqrt{2}} &amp; 0 \\<br>\frac{1}{\sqrt{2}} &amp; \frac{1}{\sqrt{2}} &amp; 0 \\<br>0 &amp; 0 &amp; 1<br>\end{pmatrix}$或$\begin{pmatrix}<br>\frac{1}{\sqrt{2}} &amp; 0 &amp; \frac{-1}{\sqrt{2}} \\<br>\frac{1}{\sqrt{2}} &amp; 0 &amp; \frac{1}{\sqrt{2}} \\<br>0 &amp; 1 &amp; 0<br>\end{pmatrix}$或$\begin{pmatrix}<br>0 &amp; \frac{1}{\sqrt{2}} &amp; \frac{-1}{\sqrt{2}} \\<br>0 &amp; \frac{1}{\sqrt{2}} &amp; \frac{1}{\sqrt{2}} \\<br>1 &amp; 0 &amp; 0<br>\end{pmatrix}$。第三个矩阵是错误的，因为三个特征值(其中两个是重根)，对应三个特征向量，其中$\begin{pmatrix}<br>0\\<br>0\\<br>1<br>\end{pmatrix}$在这里不属于$\lambda_{3}$，并且第一个矩阵的写法更好，因为有内容的向量均集中在左上角，有利于压缩。</p>
-<h3 id="第二步计算非负实数对角矩阵sigma"><a href="#第二步计算非负实数对角矩阵sigma" class="headerlink" title="第二步计算非负实数对角矩阵sigma"></a>第二步计算非负实数对角矩阵sigma</h3><p>计算$\Sigma_{mn}=\begin{bmatrix}\Sigma_1 &amp; 0 \\ 0 &amp; 0\end{bmatrix}$，其中$\Sigma_1=diag(\sigma_1,\sigma_1,\dots,\sigma_r)$是将第一步求出的<strong>非零特征值从大到小排列后开根号</strong>的值，这里$\Sigma=\begin{bmatrix} 2&amp;0 \\ 0&amp;0 \\ 0&amp;0 \end{bmatrix}$。</p>
-<h3 id="第三步计算右奇异向量矩阵V"><a href="#第三步计算右奇异向量矩阵V" class="headerlink" title="第三步计算右奇异向量矩阵V"></a>第三步计算右奇异向量矩阵V</h3><p>补充一个知识点$AA^{T}=A^{T}A$有相同的特征值。参照第一步的计算方法，可直接计算特征向量，并得到右奇异向量矩阵为$\begin{pmatrix}<br>\frac{1}{\sqrt{2}} &amp; \frac{-1}{\sqrt{2}} \\<br>\frac{1}{\sqrt{2}} &amp; \frac{1}{\sqrt{2}}<br>\end{pmatrix}$</p>
-<p>最终，我们可以得到A的奇异值分解$$A=U \Sigma V^T= \begin{bmatrix} \frac{1}{\sqrt{2}}&amp;-\frac{1}{\sqrt{2}}&amp;0 \\ \frac{1}{\sqrt{2}}&amp;\frac{1}{\sqrt{2}}&amp;0 \\ 0&amp;0&amp;1 \end{bmatrix} \begin{bmatrix} 2&amp;0 \\ 0&amp;0 \\ 0&amp;0 \end{bmatrix} {\begin{bmatrix} \frac{1}{\sqrt{2}}&amp;-\frac{1}{\sqrt{2}} \\ \frac{1}{\sqrt{2}}&amp;\frac{1}{\sqrt{2}}\end{bmatrix}}^T=\begin{bmatrix} 1&amp;1\\1&amp;1\\0&amp;0\end{bmatrix}$$</p>
-<h1 id="基于MovieLens数据集的实战"><a href="#基于MovieLens数据集的实战" class="headerlink" title="基于MovieLens数据集的实战"></a>基于MovieLens数据集的实战</h1><p><strong>reference</strong></p>
-<p>[1] <a target="_blank" rel="noopener" href="https://www.cnblogs.com/marsggbo/p/10155801.html">https://www.cnblogs.com/marsggbo/p/10155801.html</a></p>
-<p>[2] <a target="_blank" rel="noopener" href="http://www.jeepxie.net/article/382144.html">http://www.jeepxie.net/article/382144.html</a></p>
+        <p>声明：本文重度参考了公众号「代码随想录」的文章</p>
+<h2 id="回溯算法的概念"><a href="#回溯算法的概念" class="headerlink" title="回溯算法的概念"></a>回溯算法的概念</h2><p>回溯法也可以叫做回溯搜索法，是一种搜索方式。</p>
+<p>在二叉树当中有大量回溯算法的应用，例如<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/ivLkHzWdhjQQD1rQWe6zWA">二叉树：以为使用了递归，其实还隐藏着回溯</a>这部分知识我还没有仔细整理，挖坑…</p>
+<p>回溯是递归的副产品，只要有递归就会有回溯。</p>
+<p>🔥<strong>回溯函数也就是递归函数</strong>，指的是一个函数。</p>
+<h2 id="回溯算法的效率"><a href="#回溯算法的效率" class="headerlink" title="回溯算法的效率"></a>回溯算法的效率</h2><p>回溯算法<strong>不是高效的算法</strong>，因为回溯的<strong>本质是穷举</strong>，一般可通过<strong>剪枝操作</strong>提升一定的效率。</p>
+<h2 id="回溯算法解决的问题"><a href="#回溯算法解决的问题" class="headerlink" title="回溯算法解决的问题"></a>回溯算法解决的问题</h2><ul>
+<li>组合问题：从N个数中找出所有k个满足条件的数组的集合<ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/combinations/">77.组合</a></li>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/combination-sum-iii/">216.组合总和III</a></li>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/letter-combinations-of-a-phone-number/">17.电话号码的字母组合</a></li>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/combination-sum/">39.组合总和</a></li>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/combination-sum-ii/">40.组合总和II</a></li>
+</ul>
+</li>
+<li>切割问题：将一个字符串按一定规则切割有几种切割方式<ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/palindrome-partitioning/">131.分割回文串</a></li>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/restore-ip-addresses/">93.复原IP地址</a></li>
+</ul>
+</li>
+<li>子集问题：从N个数的集合中找出满足条件的全部子集<ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/subsets/">78.子集</a></li>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/subsets-ii/">90.子集II</a></li>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/increasing-subsequences/">491.递增子序列</a></li>
+</ul>
+</li>
+<li>排列问题：将N个数进行<strong>全排列</strong>，找出所有不同的排列方式<ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/permutations/">46.全排列</a></li>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/permutations-ii/">47.全排列II</a></li>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/reconstruct-itinerary/">322.重新安排行程</a></li>
+</ul>
+</li>
+<li>棋盘问题：解决二维数组的问题<ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/n-queens/">51.N皇后</a></li>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/sudoku-solver/">37.解数独</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="回溯算法概念理解"><a href="#回溯算法概念理解" class="headerlink" title="回溯算法概念理解"></a>回溯算法概念理解</h2><p>回溯法解决的问题都可以抽象为<strong>树形结构</strong>，因为回溯法解决的都是在集合中递归查找子集，<strong>集合的大小构成树的宽度，题目的要求决定了递归的深度，也就是树的深度。</strong></p>
+<p>递归就要有终止条件，所以必然是一棵高度有限的N叉树。</p>
+<h2 id="回溯算法模板"><a href="#回溯算法模板" class="headerlink" title="回溯算法模板"></a>回溯算法模板</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">backtracking</span><span class="params">(参数)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (终止条件) &#123;</span><br><span class="line">		存放结果;</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">	<span class="keyword">for</span> (选择:本层集合中元素(树中节点孩子的数量就是集合的大小)) &#123;</span><br><span class="line">    处理节点;</span><br><span class="line">    backtracking(路径，选择列表); <span class="comment">// 递归</span></span><br><span class="line">		回溯，撤销处理结果</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
       
 
@@ -232,11 +251,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">机器学习</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">svd</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">回溯算法</a>
         		</li>
       		
 		</ul>
@@ -292,7 +307,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2020/10/18/svd/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2021/02/04/%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95%E6%A6%82%E5%BF%B5/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -306,18 +321,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/12/03/%E4%BA%8C%E5%8F%89%E6%A0%91%E9%81%8D%E5%8E%86/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          二叉树遍历
-        
-      </div>
-    </a>
   
-  
-    <a href="/2020/10/07/my-first-blog/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">My First Blog</div>
+    <a href="/2021/02/02/2021%E5%B9%B4%E6%98%A5%E6%8B%9B%E8%AE%B0%E5%BD%95/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">2021年春招记录</div>
       <i class="icon-circle-right"></i>
     </a>
   

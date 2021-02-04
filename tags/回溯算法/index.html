@@ -6,20 +6,14 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>从svd到推荐系统 | Hexo</title>
+  <title>Tag: 回溯算法 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="奇异值分解(SVD singular value decomposition)奇异值分解是线性代数中一种重要的矩阵分解方法，这篇文章通过一个具体的例子来说明如何对一个矩阵A进行奇异值分解。 首先，对于一个m*n的矩阵，如果存在正交矩阵U(m*m阶)和V(n*n阶)，使得(1)式成立：$$A&#x3D;U\Sigma V^{T}\tag{1}$$ 则将式(1)的过程称为奇异值分解，其中$\Sigma_{mn}">
-<meta property="og:type" content="article">
-<meta property="og:title" content="从svd到推荐系统">
-<meta property="og:url" content="http://example.com/2020/10/18/svd/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/tags/%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="奇异值分解(SVD singular value decomposition)奇异值分解是线性代数中一种重要的矩阵分解方法，这篇文章通过一个具体的例子来说明如何对一个矩阵A进行奇异值分解。 首先，对于一个m*n的矩阵，如果存在正交矩阵U(m*m阶)和V(n*n阶)，使得(1)式成立：$$A&#x3D;U\Sigma V^{T}\tag{1}$$ 则将式(1)的过程称为奇异值分解，其中$\Sigma_{mn}">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-10-18T08:06:11.000Z">
-<meta property="article:modified_time" content="2020-10-23T07:39:31.976Z">
 <meta property="article:author" content="John Doe">
-<meta property="article:tag" content="机器学习">
-<meta property="article:tag" content="svd">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -156,201 +150,60 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-svd" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      从svd到推荐系统
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2021" class="archive-year">2021</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2021/02/04/%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95%E6%A6%82%E5%BF%B5/" class="archive-article-date">
+  	<time datetime="2021-02-04T07:21:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-04</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2021/02/04/%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95%E6%A6%82%E5%BF%B5/">回溯算法概念</a>
     </h1>
   
 
-        
-        <a href="/2020/10/18/svd/" class="archive-article-date">
-  	<time datetime="2020-10-18T08:06:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="奇异值分解-SVD-singular-value-decomposition"><a href="#奇异值分解-SVD-singular-value-decomposition" class="headerlink" title="奇异值分解(SVD singular value decomposition)"></a>奇异值分解(SVD singular value decomposition)</h1><p>奇异值分解是线性代数中一种重要的矩阵分解方法，这篇文章通过一个具体的例子来说明如何对一个矩阵A进行奇异值分解。</p>
-<p>首先，对于一个m*n的矩阵，如果存在正交矩阵U(m*m阶)和V(n*n阶)，使得(1)式成立：$$A=U\Sigma V^{T}\tag{1}$$</p>
-<p>则将式(1)的过程称为奇异值分解，其中$\Sigma_{mn}=\begin{bmatrix}\Sigma_1 &amp; 0 \\ 0 &amp; 0\end{bmatrix}$，且$\Sigma_1=diag(\sigma_1,\sigma_1,\dots,\sigma_r)$，U和V分别称为A的<strong>左奇异</strong>向量矩阵和<strong>右奇异</strong>向量矩阵，且均为酉矩阵(即满足$AA_{T}=E$的矩阵)。下面用一个具体的例子来说明如何得到上述的分解。假设我们有一个矩阵$A=\begin{bmatrix} 1&amp;1\\1&amp;1\\0&amp;0\end{bmatrix}$</p>
-<h3 id="第一步计算左奇异向量矩阵U"><a href="#第一步计算左奇异向量矩阵U" class="headerlink" title="第一步计算左奇异向量矩阵U"></a>第一步计算左奇异向量矩阵U</h3><p>计算矩阵$AA^T=\begin{bmatrix} 2&amp;2&amp;0\\2&amp;2&amp;0\\0&amp;0&amp;0\end{bmatrix}$，对其进行特征分解，也就是计算特征值特征向量。</p>
-<p><strong>step1</strong>：求特征值</p>
-<p>$\left | \lambda E-A \right |=0$</p>
-<p>$\begin{vmatrix}<br>\lambda -2 &amp; -2 &amp; 0 \\<br>-2 &amp; \lambda -2 &amp; 0 \\<br>0 &amp; 0 &amp; \lambda<br>\end{vmatrix}=\lambda \times (-1)^{3 \times 3}\begin{vmatrix}<br>\lambda-2 &amp; -2 \\<br>-2 &amp; \lambda-2<br>\end{vmatrix}$将行列式按第三行展开，乘上其代数余子式，展开计算后可得$\lambda_{1}=\lambda_{2}=0,\lambda_{3}=4$</p>
-<p><strong>step2</strong>：求特征向量</p>
-<p>情况1：$\lambda_{1}=\lambda_{2}=0$</p>
-<p>$\lambda E-A\alpha =0$解一个齐次线性方程组</p>
-<p>$\lambda E-A=\begin{pmatrix}<br>-2 &amp; -2 &amp; 0 \\<br>-2 &amp; -2 &amp; 0 \\<br>0 &amp; 0 &amp; 0<br>\end{pmatrix}$将该矩阵通过初等行变换化为行简化阶梯形矩阵。</p>
-<p>$\begin{pmatrix}<br>-2 &amp; -2 &amp; 0 \\<br>-2 &amp; -2 &amp; 0 \\<br>0 &amp; 0 &amp; 0<br>\end{pmatrix}-&gt;\begin{pmatrix}<br>-2 &amp; -2 &amp; 0 \\<br>-2 &amp; -2 &amp; 0 \\<br>0 &amp; 0 &amp; 0<br>\end{pmatrix}-&gt;\begin{pmatrix}<br>1 &amp; 1 &amp; 0 \\<br>0 &amp; 0 &amp; 0 \\<br>0 &amp; 0 &amp; 0<br>\end{pmatrix}$</p>
-<p>矩阵1到矩阵2的操作为将第二行减去第一行，矩阵2到矩阵3的操作为将第一行乘以-0.5，得到方程$x_{1}=-x_{2}$，其中$x_{2},x_{3}$为自由未知量，取$\begin{pmatrix}<br>x_{2}\\<br>x_{3}<br>\end{pmatrix}=\begin{pmatrix}<br>1\\<br>0<br>\end{pmatrix},\begin{pmatrix}<br>0\\<br>1<br>\end{pmatrix}$得特征向量$\begin{pmatrix}<br>-1\\<br>1\\<br>0<br>\end{pmatrix},\begin{pmatrix}<br>0\\<br>0\\<br>1<br>\end{pmatrix}$，还需要化为单位向量，得$\begin{pmatrix}<br>\frac{-1}{\sqrt{2}}\\<br>\frac{1}{\sqrt{2}}\\<br>0<br>\end{pmatrix},\begin{pmatrix}<br>0\\<br>0\\<br>1<br>\end{pmatrix}$</p>
-<p>情况2：$\lambda_{3}=4$</p>
-<p>参考情况1的解法可得对应的特征向量为$\begin{pmatrix}<br>\frac{1}{\sqrt{2}}\\<br>\frac{1}{\sqrt{2}}\\<br>0<br>\end{pmatrix},\begin{pmatrix}<br>0\\<br>0\\<br>1<br>\end{pmatrix}$</p>
-<p>接下来按照<strong>特征值从大到小排列</strong>对应的特征向量构成左奇异向量矩阵，注意特征向量均为列向量，在矩阵中按列排。可以得到$\begin{pmatrix}<br>\frac{1}{\sqrt{2}} &amp; \frac{-1}{\sqrt{2}} &amp; 0 \\<br>\frac{1}{\sqrt{2}} &amp; \frac{1}{\sqrt{2}} &amp; 0 \\<br>0 &amp; 0 &amp; 1<br>\end{pmatrix}$或$\begin{pmatrix}<br>\frac{1}{\sqrt{2}} &amp; 0 &amp; \frac{-1}{\sqrt{2}} \\<br>\frac{1}{\sqrt{2}} &amp; 0 &amp; \frac{1}{\sqrt{2}} \\<br>0 &amp; 1 &amp; 0<br>\end{pmatrix}$或$\begin{pmatrix}<br>0 &amp; \frac{1}{\sqrt{2}} &amp; \frac{-1}{\sqrt{2}} \\<br>0 &amp; \frac{1}{\sqrt{2}} &amp; \frac{1}{\sqrt{2}} \\<br>1 &amp; 0 &amp; 0<br>\end{pmatrix}$。第三个矩阵是错误的，因为三个特征值(其中两个是重根)，对应三个特征向量，其中$\begin{pmatrix}<br>0\\<br>0\\<br>1<br>\end{pmatrix}$在这里不属于$\lambda_{3}$，并且第一个矩阵的写法更好，因为有内容的向量均集中在左上角，有利于压缩。</p>
-<h3 id="第二步计算非负实数对角矩阵sigma"><a href="#第二步计算非负实数对角矩阵sigma" class="headerlink" title="第二步计算非负实数对角矩阵sigma"></a>第二步计算非负实数对角矩阵sigma</h3><p>计算$\Sigma_{mn}=\begin{bmatrix}\Sigma_1 &amp; 0 \\ 0 &amp; 0\end{bmatrix}$，其中$\Sigma_1=diag(\sigma_1,\sigma_1,\dots,\sigma_r)$是将第一步求出的<strong>非零特征值从大到小排列后开根号</strong>的值，这里$\Sigma=\begin{bmatrix} 2&amp;0 \\ 0&amp;0 \\ 0&amp;0 \end{bmatrix}$。</p>
-<h3 id="第三步计算右奇异向量矩阵V"><a href="#第三步计算右奇异向量矩阵V" class="headerlink" title="第三步计算右奇异向量矩阵V"></a>第三步计算右奇异向量矩阵V</h3><p>补充一个知识点$AA^{T}=A^{T}A$有相同的特征值。参照第一步的计算方法，可直接计算特征向量，并得到右奇异向量矩阵为$\begin{pmatrix}<br>\frac{1}{\sqrt{2}} &amp; \frac{-1}{\sqrt{2}} \\<br>\frac{1}{\sqrt{2}} &amp; \frac{1}{\sqrt{2}}<br>\end{pmatrix}$</p>
-<p>最终，我们可以得到A的奇异值分解$$A=U \Sigma V^T= \begin{bmatrix} \frac{1}{\sqrt{2}}&amp;-\frac{1}{\sqrt{2}}&amp;0 \\ \frac{1}{\sqrt{2}}&amp;\frac{1}{\sqrt{2}}&amp;0 \\ 0&amp;0&amp;1 \end{bmatrix} \begin{bmatrix} 2&amp;0 \\ 0&amp;0 \\ 0&amp;0 \end{bmatrix} {\begin{bmatrix} \frac{1}{\sqrt{2}}&amp;-\frac{1}{\sqrt{2}} \\ \frac{1}{\sqrt{2}}&amp;\frac{1}{\sqrt{2}}\end{bmatrix}}^T=\begin{bmatrix} 1&amp;1\\1&amp;1\\0&amp;0\end{bmatrix}$$</p>
-<h1 id="基于MovieLens数据集的实战"><a href="#基于MovieLens数据集的实战" class="headerlink" title="基于MovieLens数据集的实战"></a>基于MovieLens数据集的实战</h1><p><strong>reference</strong></p>
-<p>[1] <a target="_blank" rel="noopener" href="https://www.cnblogs.com/marsggbo/p/10155801.html">https://www.cnblogs.com/marsggbo/p/10155801.html</a></p>
-<p>[2] <a target="_blank" rel="noopener" href="http://www.jeepxie.net/article/382144.html">http://www.jeepxie.net/article/382144.html</a></p>
-
-      
-
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">机器学习</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">svd</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">回溯算法</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2020/10/18/svd/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2020/12/03/%E4%BA%8C%E5%8F%89%E6%A0%91%E9%81%8D%E5%8E%86/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          二叉树遍历
-        
-      </div>
-    </a>
   
   
-    <a href="/2020/10/07/my-first-blog/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">My First Blog</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-  
+    </div></section>
   
 
-  
-
-  
-
-  
+    
 
 
           </div>
@@ -373,9 +226,9 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
