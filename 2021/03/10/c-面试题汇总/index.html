@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>回溯算法概念 | Hexo</title>
+  <title>c++面试题汇总 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="声明：本文重度参考了公众号「代码随想录」的文章 回溯算法的概念回溯法也可以叫做回溯搜索法，是一种搜索方式。 在二叉树当中有大量回溯算法的应用，例如二叉树：以为使用了递归，其实还隐藏着回溯这部分知识我还没有仔细整理，挖坑… 回溯是递归的副产品，只要有递归就会有回溯。 🔥回溯函数也就是递归函数，指的是一个函数。 回溯算法的效率回溯算法不是高效的算法，因为回溯的本质是穷举，一般可通过剪枝操作提升一定的">
+  <meta name="description" content="智能指针循环引用及解决方案123456789101112131415161718192021222324252627282930313233#include &lt;iostream&gt;#include &lt;memory&gt;using std::shared_ptr;using std::weak_ptr;using std::cout;using std::endl;class Cy">
 <meta property="og:type" content="article">
-<meta property="og:title" content="回溯算法概念">
-<meta property="og:url" content="http://example.com/2021/02/04/%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95%E6%A6%82%E5%BF%B5/index.html">
+<meta property="og:title" content="c++面试题汇总">
+<meta property="og:url" content="http://example.com/2021/03/10/c-%E9%9D%A2%E8%AF%95%E9%A2%98%E6%B1%87%E6%80%BB/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="声明：本文重度参考了公众号「代码随想录」的文章 回溯算法的概念回溯法也可以叫做回溯搜索法，是一种搜索方式。 在二叉树当中有大量回溯算法的应用，例如二叉树：以为使用了递归，其实还隐藏着回溯这部分知识我还没有仔细整理，挖坑… 回溯是递归的副产品，只要有递归就会有回溯。 🔥回溯函数也就是递归函数，指的是一个函数。 回溯算法的效率回溯算法不是高效的算法，因为回溯的本质是穷举，一般可通过剪枝操作提升一定的">
+<meta property="og:description" content="智能指针循环引用及解决方案123456789101112131415161718192021222324252627282930313233#include &lt;iostream&gt;#include &lt;memory&gt;using std::shared_ptr;using std::weak_ptr;using std::cout;using std::endl;class Cy">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-02-04T07:21:00.000Z">
-<meta property="article:modified_time" content="2021-02-04T08:00:10.719Z">
+<meta property="article:published_time" content="2021-03-10T13:42:14.000Z">
+<meta property="article:modified_time" content="2021-03-23T10:07:19.657Z">
 <meta property="article:author" content="John Doe">
-<meta property="article:tag" content="回溯算法">
+<meta property="article:tag" content="-c++知识点">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -155,68 +155,130 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-回溯算法概念" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-c-面试题汇总" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      回溯算法概念
+      c++面试题汇总
     </h1>
   
 
         
-        <a href="/2021/02/04/%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95%E6%A6%82%E5%BF%B5/" class="archive-article-date">
-  	<time datetime="2021-02-04T07:21:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-04</time>
+        <a href="/2021/03/10/c-%E9%9D%A2%E8%AF%95%E9%A2%98%E6%B1%87%E6%80%BB/" class="archive-article-date">
+  	<time datetime="2021-03-10T13:42:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-10</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>声明：本文重度参考了公众号「代码随想录」的文章</p>
-<h2 id="回溯算法的概念"><a href="#回溯算法的概念" class="headerlink" title="回溯算法的概念"></a>回溯算法的概念</h2><p>回溯法也可以叫做回溯搜索法，是一种搜索方式。</p>
-<p>在二叉树当中有大量回溯算法的应用，例如<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/ivLkHzWdhjQQD1rQWe6zWA">二叉树：以为使用了递归，其实还隐藏着回溯</a>这部分知识我还没有仔细整理，挖坑…</p>
-<p>回溯是递归的副产品，只要有递归就会有回溯。</p>
-<p>🔥<strong>回溯函数也就是递归函数</strong>，指的是一个函数。</p>
-<h2 id="回溯算法的效率"><a href="#回溯算法的效率" class="headerlink" title="回溯算法的效率"></a>回溯算法的效率</h2><p>回溯算法<strong>不是高效的算法</strong>，因为回溯的<strong>本质是穷举</strong>，一般可通过<strong>剪枝操作</strong>提升一定的效率。</p>
-<h2 id="回溯算法解决的问题"><a href="#回溯算法解决的问题" class="headerlink" title="回溯算法解决的问题"></a>回溯算法解决的问题</h2><ul>
-<li>组合问题：从N个数中找出所有k个满足条件的数组的集合<ul>
-<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/combinations/">77.组合</a></li>
-<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/combination-sum-iii/">216.组合总和III</a></li>
-<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/letter-combinations-of-a-phone-number/">17.电话号码的字母组合</a></li>
-<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/combination-sum/">39.组合总和</a></li>
-<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/combination-sum-ii/">40.组合总和II</a></li>
-</ul>
-</li>
-<li>切割问题：将一个字符串按一定规则切割有几种切割方式<ul>
-<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/palindrome-partitioning/">131.分割回文串</a></li>
-<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/restore-ip-addresses/">93.复原IP地址</a></li>
-</ul>
-</li>
-<li>子集问题：从N个数的集合中找出满足条件的全部子集<ul>
-<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/subsets/">78.子集</a></li>
-<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/subsets-ii/">90.子集II</a></li>
-<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/increasing-subsequences/">491.递增子序列</a></li>
-</ul>
-</li>
-<li>排列问题：将N个数进行<strong>全排列</strong>，找出所有不同的排列方式<ul>
-<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/permutations/">46.全排列</a></li>
-<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/permutations-ii/">47.全排列II</a></li>
-<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/reconstruct-itinerary/">322.重新安排行程</a></li>
-</ul>
-</li>
-<li>棋盘问题：解决二维数组的问题<ul>
-<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/n-queens/">51.N皇后</a></li>
-<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/sudoku-solver/">37.解数独</a></li>
-</ul>
-</li>
-</ul>
-<h2 id="回溯算法概念理解"><a href="#回溯算法概念理解" class="headerlink" title="回溯算法概念理解"></a>回溯算法概念理解</h2><p>回溯法解决的问题都可以抽象为<strong>树形结构</strong>，因为回溯法解决的都是在集合中递归查找子集，<strong>集合的大小构成树的宽度，题目的要求决定了递归的深度，也就是树的深度。</strong></p>
-<p>递归就要有终止条件，所以必然是一棵高度有限的N叉树。</p>
-<h2 id="回溯算法模板"><a href="#回溯算法模板" class="headerlink" title="回溯算法模板"></a>回溯算法模板</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">backtracking</span><span class="params">(参数)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (终止条件) &#123;</span><br><span class="line">		存放结果;</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">	<span class="keyword">for</span> (选择:本层集合中元素(树中节点孩子的数量就是集合的大小)) &#123;</span><br><span class="line">    处理节点;</span><br><span class="line">    backtracking(路径，选择列表); <span class="comment">// 递归</span></span><br><span class="line">		回溯，撤销处理结果</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h3 id="智能指针循环引用及解决方案"><a href="#智能指针循环引用及解决方案" class="headerlink" title="智能指针循环引用及解决方案"></a>智能指针循环引用及解决方案</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;memory&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">shared_ptr</span>;</span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::weak_ptr;</span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">cout</span>;</span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CycleRef</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    ~CycleRef() &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;destroy CycleRef&quot;</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">shared_ptr</span>&lt;CycleRef&gt; selfRef;       <span class="comment">////&lt; @note 自己指向自己形成环</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">cycleRefTest</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="built_in">shared_ptr</span>&lt;CycleRef&gt; <span class="title">cycleRefPtr</span><span class="params">(<span class="keyword">new</span> CycleRef)</span></span>;</span><br><span class="line">    cycleRefPtr-&gt;selfRef = cycleRefPtr;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;reference count:&quot;</span> &lt;&lt; cycleRefPtr.use_count() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    cycleRefTest();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">输出为：</span></span><br><span class="line"><span class="comment">reference count:2</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
 
+<p>说明<code>CycleRef</code>这个对象没有成功释放，因为该对象创建在堆上，且有两个<code>shared_ptr</code>指向该内存。当函数<code>void cycleRefTest()</code>运行完成，智能指针变量<code>cycleRefPtr</code>释放，由于<code>selfRef</code>仍然存在，该对象的引用变为1，但<code>selfRef</code>就存储在这片内存上形成了环，这时候这段内存就无法释放，导致内存泄漏。</p>
+<p>解决方法很简单，将类中的<code>shared_ptr</code>修改为<code>weak_ptr</code>，因为<code>weak_ptr</code>不影响智能指针的计数，所以当函数<code>void cycleRefTest()</code>运行完成，智能指针变量<code>cycleRefPtr</code>释放时，该变量的引用变为0.成功释放。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CycleRef</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    ~CycleRef() &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;destroy CycleRef&quot;</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    weak_ptr&lt;CycleRef&gt; selfRef;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">reference count:1</span></span><br><span class="line"><span class="comment">destroy CycleRef</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="c-程序的内存分区"><a href="#c-程序的内存分区" class="headerlink" title="c++程序的内存分区"></a>c++程序的内存分区</h3><ul>
+<li>栈区：由编译器自动分配释放，存放局部变量</li>
+<li>堆区：一般由程序员分配释放，存放程序员通过<code>malloc</code>申请的内存</li>
+<li>全局变量区：存放全局变量，static变量</li>
+<li>常量区：存放字符串等常量，程序结束后由系统释放</li>
+<li>代码区：存放二进制代码</li>
+</ul>
+<h3 id="内存对齐"><a href="#内存对齐" class="headerlink" title="内存对齐"></a>内存对齐</h3><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/30007037">https://zhuanlan.zhihu.com/p/30007037</a></p>
+<p>目前为止读到过解释得最清楚的博客</p>
+<h3 id="static"><a href="#static" class="headerlink" title="static"></a>static</h3><ul>
+<li>修饰全局变量时表示该变量只对定义在同一文件中的函数可见(不建议将全局变量定义在头文件中)</li>
+<li>修饰局部变量时表示该变量的值不会因为函数终止而释放，且该局部变量在函数第一次调用时初始化</li>
+<li>修饰函数时表示该函数只在同一文件中调用</li>
+<li>修饰类的数据成员时表示该数据成员属于全体对象共有</li>
+<li>修饰类的成员函数时表示该成员函数只能访问该函数自己的参数、类的静态数据成员和全局变量，不能调用普通成员函数，反过来却是可以的</li>
+</ul>
+<h3 id="const"><a href="#const" class="headerlink" title="const"></a>const</h3><h3 id="线程和进程的概念"><a href="#线程和进程的概念" class="headerlink" title="线程和进程的概念"></a>线程和进程的概念</h3><ul>
+<li>进程：在操作系统构成单独执行流的单位，占用内存空间的正在运行的程序，每个进程拥有完全独立的内存结构</li>
+<li>线程：在进程构成单独执行流的单位，线程共享数据区和堆区，独占栈区</li>
+</ul>
+<h3 id="进程通信"><a href="#进程通信" class="headerlink" title="进程通信"></a>进程通信</h3><p>管道通信</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pipe</span><span class="params">(<span class="keyword">int</span> filedes[<span class="number">2</span>])</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>信号：SIGURG、SIGTERM</p>
+<p>共享内存：映射一段能被其他进程所访问的内存，这段共享内存由一个进程创建，但多个进程都可以访问。共享内存是最快的 IPC 方式。</p>
+<h3 id="信号在代码中如何实现"><a href="#信号在代码中如何实现" class="headerlink" title="信号在代码中如何实现"></a>信号在代码中如何实现</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;csignal&gt;</span></span></span><br><span class="line"></span><br><span class="line">sigaction();</span><br></pre></td></tr></table></figure>
+
+<h3 id="防止死锁"><a href="#防止死锁" class="headerlink" title="防止死锁"></a>防止死锁</h3><p><strong>死锁产生的条件</strong></p>
+<ul>
+<li>互斥条件：临界资源是独占资源，进程应互斥且排他的使用这些资源。</li>
+<li>占有和等待条件：进程在请求资源得不到满足而等待时，不释放已占有资源。</li>
+<li>不剥夺条件：又称不可抢占，已获资源只能由进程自愿释放，不允许被其他进程剥夺。</li>
+<li>循环等待条件：又称环路条件，存在循环等待链，其中，每个进程都在等待链中等待下一个进程所持有的资源，造成这组进程处于永远等待状态。</li>
+</ul>
+<p><strong>死锁只有在这四个条件同时满足时出现。</strong></p>
+<p><strong>死锁产生的原因</strong></p>
+<p>死锁产生的原因有很多，如：</p>
+<ul>
+<li>进程顺序不当</li>
+<li>PV操作使用不妥</li>
+<li>同类资源分配不均</li>
+<li>对某些资源的使用未加限制</li>
+</ul>
+<blockquote>
+<p>可见，产生死锁的原因不仅与系统拥有的资源数量有关，而且与资源分配策略、进程对资源的使用要求以及进程的推进顺序有关。</p>
+</blockquote>
+<p><strong>死锁解决的方法</strong></p>
+<ul>
+<li>死锁防止</li>
+<li>死锁避免</li>
+<li>死锁检测和恢复</li>
+</ul>
+<h3 id="消息队列"><a href="#消息队列" class="headerlink" title="消息队列"></a>消息队列</h3><p>通过容器queue和锁实现，用于线程通信</p>
+<h3 id="TCP三次握手-四次挥手"><a href="#TCP三次握手-四次挥手" class="headerlink" title="TCP三次握手/四次挥手"></a>TCP三次握手/四次挥手</h3><p>以客户端向服务器端发起连接请求为例</p>
+<h3 id="SELECT"><a href="#SELECT" class="headerlink" title="SELECT"></a>SELECT</h3><h3 id="EPOLL"><a href="#EPOLL" class="headerlink" title="EPOLL"></a>EPOLL</h3><h3 id="条件触发-amp-边缘触发"><a href="#条件触发-amp-边缘触发" class="headerlink" title="条件触发&amp;边缘触发"></a>条件触发&amp;边缘触发</h3><p>条件触发和边缘触发的区别在于发生事件的时间点</p>
+<ul>
+<li>条件触发方式中，只要输入缓冲中还剩有数据，就将以事件方式再次注册</li>
+<li>边缘触发中输入缓冲收到数据时仅注册1次该事件。即使输入缓冲中还剩有数据，也不会再进行注册</li>
+</ul>
+<h3 id="GDB"><a href="#GDB" class="headerlink" title="GDB"></a>GDB</h3><p>首先程序编译时加上<code>-g</code>选项</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gdb &lt;可执行文件&gt; &lt;core&gt;</span><br></pre></td></tr></table></figure>
+
+<p>进入调试环节</p>
+<p>查看堆栈使用<code>bt</code>或者<code>where</code>命令</p>
+<p><code>info threads</code>查看所有线程正在运行的指令信息</p>
+<p><code>thread apply all bt</code>打开所有线程的堆栈信息</p>
+<h3 id="vector底层实现"><a href="#vector底层实现" class="headerlink" title="vector底层实现"></a>vector底层实现</h3><p>vector底层是一段连续内存，包含三个指针first、last、end，first指向第一个元素，last指向最后一个元素，end指向内存最后的位置。通过三个指针相对位置的比较可以实现vector的对应功能</p>
+<h3 id="虚函数表"><a href="#虚函数表" class="headerlink" title="虚函数表"></a>虚函数表</h3><p><strong>虚函数和纯虚函数的概念</strong></p>
+<p>*虚函数<strong>：被 <code>virtual</code> 关键字修饰的成员函数，就是虚函数。</strong></p>
+<p>纯虚函数**：纯虚函数在类中声明时，加上<code>=0</code></p>
+<p>说明：</p>
+<ul>
+<li><p>含有纯虚函数的类称为抽象类（只要含有纯虚函数这个类就是抽象类），类中只有接口，没有具体的实现方法；</p>
+</li>
+<li><p>继承纯虚函数的派生类，如果没有完全实现基类纯虚函数，依然是抽象类，不能实例化对象</p>
+</li>
+<li><p>抽象类对象不能作为函数的参数，不能创建对象，不能作为函数返回类型</p>
+</li>
+<li><p>可以声明抽象类指针，可以声明抽象类的引用</p>
+</li>
+<li><p>子类必须继承父类的纯虚函数，并全部实现后，才能创建子类的对象</p>
+</li>
+</ul>
+<p><strong>虚函数和纯虚函数的区别</strong></p>
+<ul>
+<li>虚函数和纯虚函数可以出现在同一个类中，含有纯虚函数的类称为抽象基类</li>
+<li>使用方式不同：虚函数可以直接使用，纯虚函数必须在派生类中实现后才能使用</li>
+<li>定义形式不同：虚函数在定义时在普通函数的基础上加上<code>virtual</code>关键字，纯虚函数定义时除了加上<code>virtual</code>关键字还需要加上<code>=0</code></li>
+<li><strong>虚函数必须实现</strong>，否则编译器会报错</li>
+<li>对于实现纯虚函数的派生类，<strong>该纯虚函数在派生类中被称为虚函数</strong>，虚函数和纯虚函数都可以在派生类中重写</li>
+<li>析构函数最好定义为虚函数，特别是对于含有继承关系的类；析构函数可以定义为纯虚函数，此时，其所在的类为抽象基类，不能创建实例化对象。</li>
+<li>虚函数对应一个vtable，这个vtable存储在<strong>对象</strong>的内存空间的。如果构造函数是虚函数，就需要通过 vtable来调用，可是对象还没有实例化，没有内存空间，无法找到vtable，所以构造函数不能是虚函数。</li>
+</ul>
+<h3 id="编译过程"><a href="#编译过程" class="headerlink" title="编译过程"></a>编译过程</h3><p>编译过程分为四个过程：编译（编译预处理、编译、优化），汇编，链接。</p>
+<p>编译预处理：处理以 # 开头的指令；</p>
+<p>编译、优化：将源码 .cpp 文件翻译成 .s 汇编代码；</p>
+<p>汇编：将汇编代码 .s 翻译成机器指令 .o 文件；</p>
+<p>链接：汇编程序生成的目标文件，即 .o 文件，并不会立即执行，因为可能会出现：.cpp 文件中的函数引用了另一个 .cpp 文件中定义的符号或者调用了某个库文件中的函数。那链接的目的就是将这些文件对应的目标文件连接成一个整体，从而生成可执行的程序 .exe 文件。</p>
 
       
 
@@ -251,7 +313,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">回溯算法</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">-c++知识点</a>
         		</li>
       		
 		</ul>
@@ -307,7 +369,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2021/02/04/%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95%E6%A6%82%E5%BF%B5/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2021/03/10/c-%E9%9D%A2%E8%AF%95%E9%A2%98%E6%B1%87%E6%80%BB/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -321,18 +383,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2021/03/10/c-%E9%9D%A2%E8%AF%95%E9%A2%98%E6%B1%87%E6%80%BB/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2021/03/23/%E6%98%A5%E6%8B%9B%E9%9D%A2%E8%AF%95%E7%AE%80%E5%8E%86%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          c++面试题汇总
+          春招面试简历项目介绍
         
       </div>
     </a>
   
   
-    <a href="/2021/02/02/2021%E5%B9%B4%E6%98%A5%E6%8B%9B%E8%AE%B0%E5%BD%95/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">2021年春招记录</div>
+    <a href="/2021/02/04/%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95%E6%A6%82%E5%BF%B5/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">回溯算法概念</div>
       <i class="icon-circle-right"></i>
     </a>
   
