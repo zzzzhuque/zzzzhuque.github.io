@@ -16,7 +16,7 @@
 <meta property="og:description" content="智能指针循环引用及解决方案123456789101112131415161718192021222324252627282930313233#include &lt;iostream&gt;#include &lt;memory&gt;using std::shared_ptr;using std::weak_ptr;using std::cout;using std::endl;class Cy">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-03-10T13:42:14.000Z">
-<meta property="article:modified_time" content="2021-03-23T10:07:19.657Z">
+<meta property="article:modified_time" content="2021-04-26T11:48:05.546Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="-c++知识点">
 <meta name="twitter:card" content="summary">
@@ -184,9 +184,17 @@
 <h3 id="c-程序的内存分区"><a href="#c-程序的内存分区" class="headerlink" title="c++程序的内存分区"></a>c++程序的内存分区</h3><ul>
 <li>栈区：由编译器自动分配释放，存放局部变量</li>
 <li>堆区：一般由程序员分配释放，存放程序员通过<code>malloc</code>申请的内存</li>
+<li>自由存储区：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_28584889/article/details/88756489">https://blog.csdn.net/qq_28584889/article/details/88756489</a></li>
 <li>全局变量区：存放全局变量，static变量</li>
 <li>常量区：存放字符串等常量，程序结束后由系统释放</li>
 <li>代码区：存放二进制代码</li>
+</ul>
+<h3 id="指针和引用的区别"><a href="#指针和引用的区别" class="headerlink" title="指针和引用的区别"></a>指针和引用的区别</h3><ul>
+<li>指针可以有多级指针(**p)，而引用只有一级</li>
+<li>可以有const指针，但是没有const引用</li>
+<li>指针和引用使用++运算符的意义不一样</li>
+<li>指针可以被初始化为nullptr，而引用必须被初始化且必须是一个已有对象的引用</li>
+<li>指针有自己的一块空间，<strong>指针是一个变量</strong>，只不过这个变量存储的是一个地址，指向内存的一个存储单元，<strong>即指针是一个实体</strong>。而引用只是一个别名</li>
 </ul>
 <h3 id="内存对齐"><a href="#内存对齐" class="headerlink" title="内存对齐"></a>内存对齐</h3><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/30007037">https://zhuanlan.zhihu.com/p/30007037</a></p>
 <p>目前为止读到过解释得最清楚的博客</p>
@@ -198,8 +206,8 @@
 <li>修饰类的成员函数时表示该成员函数只能访问该函数自己的参数、类的静态数据成员和全局变量，不能调用普通成员函数，反过来却是可以的</li>
 </ul>
 <h3 id="const"><a href="#const" class="headerlink" title="const"></a>const</h3><h3 id="线程和进程的概念"><a href="#线程和进程的概念" class="headerlink" title="线程和进程的概念"></a>线程和进程的概念</h3><ul>
-<li>进程：在操作系统构成单独执行流的单位，占用内存空间的正在运行的程序，每个进程拥有完全独立的内存结构</li>
-<li>线程：在进程构成单独执行流的单位，线程共享数据区和堆区，独占栈区</li>
+<li>进程：在操作系统构成单独执行流的单位，占用内存空间的正在运行的程序，每个进程拥有完全独立的地址空间</li>
+<li>线程：在进程构成单独执行流的单位，线程共享数据区和堆区，独占栈区，共享进程地址空间</li>
 </ul>
 <h3 id="进程通信"><a href="#进程通信" class="headerlink" title="进程通信"></a>进程通信</h3><p>管道通信</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pipe</span><span class="params">(<span class="keyword">int</span> filedes[<span class="number">2</span>])</span></span>;</span><br></pre></td></tr></table></figure>
@@ -274,11 +282,259 @@
 <li>析构函数最好定义为虚函数，特别是对于含有继承关系的类；析构函数可以定义为纯虚函数，此时，其所在的类为抽象基类，不能创建实例化对象。</li>
 <li>虚函数对应一个vtable，这个vtable存储在<strong>对象</strong>的内存空间的。如果构造函数是虚函数，就需要通过 vtable来调用，可是对象还没有实例化，没有内存空间，无法找到vtable，所以构造函数不能是虚函数。</li>
 </ul>
+<h3 id="析构函数一般定义成虚函数"><a href="#析构函数一般定义成虚函数" class="headerlink" title="析构函数一般定义成虚函数"></a>析构函数一般定义成虚函数</h3><p>析构函数定义成虚函数是为了防止内存泄漏，因为当基类的指针或者引用指向或绑定到派生类的对象时，如果未将基类的析构函数定义成虚函数，会调用基类的析构函数，那么只能将基类的成员所占的空间释放掉，派生类中特有的就会无法释放内存空间导致内存泄漏。</p>
 <h3 id="编译过程"><a href="#编译过程" class="headerlink" title="编译过程"></a>编译过程</h3><p>编译过程分为四个过程：编译（编译预处理、编译、优化），汇编，链接。</p>
 <p>编译预处理：处理以 # 开头的指令；</p>
 <p>编译、优化：将源码 .cpp 文件翻译成 .s 汇编代码；</p>
 <p>汇编：将汇编代码 .s 翻译成机器指令 .o 文件；</p>
 <p>链接：汇编程序生成的目标文件，即 .o 文件，并不会立即执行，因为可能会出现：.cpp 文件中的函数引用了另一个 .cpp 文件中定义的符号或者调用了某个库文件中的函数。那链接的目的就是将这些文件对应的目标文件连接成一个整体，从而生成可执行的程序 .exe 文件。</p>
+<h3 id="栈和队列的区别，什么时候使用栈-队列"><a href="#栈和队列的区别，什么时候使用栈-队列" class="headerlink" title="栈和队列的区别，什么时候使用栈/队列"></a>栈和队列的区别，什么时候使用栈/队列</h3><p>栈：先进后出的结构</p>
+<p>队列：先进先出的结构</p>
+<p>栈的应用：非常广泛，在CPU内部就有提供栈这个机制。主要用途：函数调用和返回，数字转字符，表达式求值，走迷宫等等。在CPU内部栈主要是用来进行子程序调用和返回，中断时数据保存和返回。在编程语言中：主要用来进行函数的调用和返回。可以说在计算机中，只要数据的保存满足先进后出的原理，都优先考虑使用栈，所以栈是计算机中不可缺的机制。</p>
+<p>队列的应用：队列主要用在和时间有关的地方，特别是操作系统中，队列是实现多任务的重要机制。windows中的消息机制就是通过队列来实现的。进程调度也是使用队列来实现，所以队列也是一个重要的机制。只要满足数据的先进先出原理就可以使用队列。</p>
+<h3 id="CPU调度算法"><a href="#CPU调度算法" class="headerlink" title="CPU调度算法"></a>CPU调度算法</h3><ul>
+<li>先来先服务的调度算法</li>
+<li>短作业优先</li>
+<li>按时间片来轮转调度</li>
+</ul>
+<h3 id="用户态和核心态"><a href="#用户态和核心态" class="headerlink" title="用户态和核心态"></a>用户态和核心态</h3><ul>
+<li>执行TRAP指令从用户态切换到核心态</li>
+<li>内核通过<strong>指针表</strong>完成对应的系统调用</li>
+<li>控制可能会在跟随TRAP指令后面的指令中返回给用户空间库过程</li>
+<li>上述内容来自《现代操作系统 第二版》人民邮电出版社第25页</li>
+</ul>
+<h3 id="进程的几种状态"><a href="#进程的几种状态" class="headerlink" title="进程的几种状态"></a>进程的几种状态</h3><ul>
+<li>进程包含运行态、就绪态和阻塞态，其状态转换共包含四个方面</li>
+<li>运行态–&gt;阻塞态：进程为等待输入而阻塞</li>
+<li>运行态–&gt;就绪态：调度程序选择另一个进程</li>
+<li>就绪态–&gt;运行态：调度程序选择这个进程</li>
+<li>阻塞态–&gt;就绪态：出现有效输入</li>
+<li>上述内容来自《现代操作系统 第二版》人民邮电出版社第44页</li>
+</ul>
+<h3 id="OSI7层模型"><a href="#OSI7层模型" class="headerlink" title="OSI7层模型"></a>OSI7层模型</h3><ul>
+<li>物理层</li>
+<li>数据链路层</li>
+<li>网络层</li>
+<li>传输层</li>
+<li>会话层</li>
+<li>表示层</li>
+<li>应用层</li>
+</ul>
+<h3 id="HTTP-协议包括哪些请求"><a href="#HTTP-协议包括哪些请求" class="headerlink" title="HTTP 协议包括哪些请求"></a>HTTP 协议包括哪些请求</h3><ul>
+<li>GET：对服务器资源的简单请求</li>
+<li>POST：用于发送包含用户提交数据的请求</li>
+<li>HEAD：类似于GET请求，不过返回的响应中没有具体内容，用于获取报头</li>
+<li>DELETE：发出一个删除指定文档的请求</li>
+</ul>
+<h3 id="简述HTTP中GET和POST的区别"><a href="#简述HTTP中GET和POST的区别" class="headerlink" title="简述HTTP中GET和POST的区别"></a>简述HTTP中GET和POST的区别</h3><p>从原理性看：</p>
+<ul>
+<li>根据HTTP规范，GET用于信息获取，而且应该是安全和幂等的</li>
+<li>根据HTTP规范，POST表示可能修改服务器上资源的请求</li>
+</ul>
+<p>从表面上看：</p>
+<ul>
+<li>GET请求的数据会附在URL后面</li>
+<li>POST的数据放在HTTP消息体中</li>
+</ul>
+<h3 id="简述HTTP中请求消息和响应消息的结构"><a href="#简述HTTP中请求消息和响应消息的结构" class="headerlink" title="简述HTTP中请求消息和响应消息的结构"></a>简述HTTP中请求消息和响应消息的结构</h3><ul>
+<li>请求消息(request)<ul>
+<li>请求行：说明请求类别</li>
+<li>消息头：发送请求的浏览器信息、用户认证信息等关于HTTP消息的附加信息</li>
+<li>空行</li>
+<li>消息体：装有客户端向服务器端传输的数据，仅POST时插入</li>
+</ul>
+</li>
+<li>响应消息(response)<ul>
+<li>状态行：含有客户端请求的处理结果<ul>
+<li>状态码：200-OK，400请求方式错误，404-资源未发现，500-服务器内部错误</li>
+</ul>
+</li>
+<li>消息头：传输的数据类型和长度等信息</li>
+<li>空行</li>
+<li>消息体：包含客户端请求的文件数据</li>
+</ul>
+</li>
+</ul>
+<h3 id="HTTPS的概念"><a href="#HTTPS的概念" class="headerlink" title="HTTPS的概念"></a>HTTPS的概念</h3><p>http中存在的问题</p>
+<ul>
+<li>请求信息明文传输，容易被窃听截取。</li>
+<li>数据的完整性未校验，容易被篡改</li>
+<li>没有验证对方身份，存在冒充危险</li>
+</ul>
+<p>为了解决上述HTTP存在的问题，就用到了HTTPS，HTTPS 协议（HyperText Transfer Protocol over Secure Socket Layer）：一般理解为HTTP+SSL/TLS，通过 SSL证书来验证服务器的身份，并为浏览器和服务器之间的通信进行加密。SSL作用于TCP/IP协议和应用层的协议之间，TLS作用于传输层</p>
+<h3 id="HTTPS数据传输流程"><a href="#HTTPS数据传输流程" class="headerlink" title="HTTPS数据传输流程"></a>HTTPS数据传输流程</h3><ol>
+<li>首先客户端通过URL访问服务器建立SSL连接。</li>
+<li>服务端收到客户端请求后，会将网站支持的证书信息（证书中包含公钥）传送一份给客户端。</li>
+<li>客户端的服务器开始协商SSL连接的安全等级，也就是信息加密的等级。</li>
+<li>客户端的浏览器根据双方同意的安全等级，建立会话密钥，然后利用网站的公钥将会话密钥加密，并传送给网站。</li>
+<li>服务器利用自己的私钥解密出会话密钥。</li>
+<li>服务器利用会话密钥加密与客户端之间的通信。</li>
+</ol>
+<h3 id="HTTPS的缺点"><a href="#HTTPS的缺点" class="headerlink" title="HTTPS的缺点"></a>HTTPS的缺点</h3><ul>
+<li>HTTPS协议多次握手，导致页面的加载时间延长近50%</li>
+<li>HTTPS连接缓存不如HTTP高效，会增加数据开销和功耗</li>
+<li>申请SSL证书需要钱，功能越强大的证书费用越高</li>
+<li>SSL涉及到的安全算法会消耗 CPU 资源，对服务器资源消耗较大</li>
+</ul>
+<h3 id="总结HTTPS和HTTP的区别"><a href="#总结HTTPS和HTTP的区别" class="headerlink" title="总结HTTPS和HTTP的区别"></a>总结HTTPS和HTTP的区别</h3><ul>
+<li>HTTPS是HTTP协议的安全版本，HTTP协议的数据传输是明文的，是不安全的，HTTPS使用了SSL/TLS协议进行了加密处理</li>
+<li>http和https使用连接方式不同，默认端口也不一样，http是80，https是443</li>
+</ul>
+<h3 id="TCP保证数据可靠传输的方法"><a href="#TCP保证数据可靠传输的方法" class="headerlink" title="TCP保证数据可靠传输的方法"></a>TCP保证数据可靠传输的方法</h3><ul>
+<li>检验和</li>
+<li>序列号/确认应答</li>
+<li>超时重传</li>
+<li>最大消息长度</li>
+<li>滑动窗口控制<ul>
+<li>流量控制</li>
+</ul>
+</li>
+<li>拥塞控制<ul>
+<li>慢启动<ul>
+<li>当发送方每收到一个 ACK，拥塞窗口 cwnd 的大小就会加 1</li>
+</ul>
+</li>
+<li>拥塞避免</li>
+<li>拥塞发生</li>
+<li>快速恢复</li>
+</ul>
+</li>
+</ul>
+<p>参考1：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/112317245">https://zhuanlan.zhihu.com/p/112317245</a></p>
+<p>参考2：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/Tc09ovdNacOtnMOMeRc_uA">https://mp.weixin.qq.com/s/Tc09ovdNacOtnMOMeRc_uA</a></p>
+<h3 id="linux的OOM机制"><a href="#linux的OOM机制" class="headerlink" title="linux的OOM机制"></a>linux的OOM机制</h3><p>OOM是指内存溢出全称out of memory，是linux中的一种保护机制，一般由内存泄漏(memory leak)引起，比如下面的代码就会触发OOM。简单理解，内存溢出就是要求分配的内存超出了系统所给的。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">   <span class="keyword">while</span>(<span class="number">1</span>) &#123;</span><br><span class="line">	     <span class="keyword">char</span> *p = (<span class="keyword">char</span>*)<span class="built_in">malloc</span>(<span class="number">1000000</span>);</span><br><span class="line">       <span class="keyword">if</span>(<span class="literal">nullptr</span> == p)&#123;</span><br><span class="line">	         <span class="built_in">printf</span>(<span class="string">&quot;break\n&quot;</span>);</span><br><span class="line">	         <span class="keyword">break</span>;</span><br><span class="line">       &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>循环中每次申请1000000字节的数据，但不释放并且指向内存地址的指针也被不断重新赋值，在这段程序自己break之前，Linux系统会启动OOM机制将程序kill掉，并且这个过程不会产生core文件</p>
+<p>从两个方面可以观察到OOM</p>
+<ul>
+<li><p>top中可以看到MEM used数值越来越大，随后程序终止，命令行会打印出Killed</p>
+</li>
+<li><p><code>egrep -i -r &#39;killed process&#39; /var/log</code>系统日志中可以看到被kill程序的进程ID</p>
+</li>
+</ul>
+<p>进一步的，通过top命令查看内存情况会发现，当Mem满的时候程序依然运行，当Swp满的时候，程序挂了，这篇<a target="_blank" rel="noopener" href="https://blog.csdn.net/zwan0518/article/details/12059213">博文</a>介绍Swp，先挖坑，以后再看。避免OOM就需要多用智能指针和RAII</p>
+<h3 id="内存泄漏-memory-leak"><a href="#内存泄漏-memory-leak" class="headerlink" title="内存泄漏(memory leak)"></a>内存泄漏(memory leak)</h3><p>内存泄漏(memory leak)是指向系统申请分配内存进行使用（new），但是用完后不归还（delete），导致占用有效内存，可分为4类</p>
+<ul>
+<li><p>常发性内存泄漏： 引起内存泄漏的代码会被很多次执行，每次执行的时候都会导致内存泄漏</p>
+</li>
+<li><p>偶发性内存泄漏：在某些特定的环境下执行引起内存泄漏的代码，才会引起内存泄漏</p>
+</li>
+<li><p>一次性内存泄漏：代码只会执行一次，但总有一块内存发生泄漏，多见于构造类的时候，析构函数没有释放内存。</p>
+</li>
+<li><p>隐式泄漏：程序运行过程中不断的分配内存，直到结束时才释放内存，但一般服务器程序会运行较长的时间，不及时释放也会导致内存耗尽以至于内存泄漏。</p>
+</li>
+</ul>
+<h3 id="栈溢出-stack-overflow"><a href="#栈溢出-stack-overflow" class="headerlink" title="栈溢出(stack overflow)"></a>栈溢出(stack overflow)</h3><p>缓冲区溢出是指程序为了临时存取数据的需要，一般会分配一些内存空间称为缓冲区。如果向缓冲区中写入缓冲区无法容纳的数据，会造成缓冲区以外的存储单元被改写，称为缓冲区溢出。</p>
+<p>而栈溢出(stack overflow)是缓冲区溢出的一种，原理也是相同的。分为上溢出和下溢出。其中，上溢出是指栈满而又向其增加新的数据，导致数据溢出；下溢出是指栈空而又进行删除操作等，导致空间溢出。比如反复递归调用函数会导致栈溢出</p>
+<h3 id="堆溢出-heap-overflow"><a href="#堆溢出-heap-overflow" class="headerlink" title="堆溢出(heap overflow)"></a>堆溢出(heap overflow)</h3><p>导致堆溢出的操作是不断的new 一个对象，一直创建新的对象，但是不销毁。</p>
+<h3 id="内存越界"><a href="#内存越界" class="headerlink" title="内存越界"></a>内存越界</h3><p>是指向系统申请一块内存后，使用时却超出申请范围。比如一些操作内存的函数：sprintf、strcpy、strcat、vsprintf、memcpy、memset、memmove。当造成内存越界的代码运行时，所带来的错误是无法避免的，通常会造成</p>
+<ul>
+<li>破坏堆内存中分配的数据</li>
+<li>破坏程序其他对象的内存空间</li>
+<li>破坏了空闲内存块</li>
+</ul>
+<p>如果程序运行一切正常，但因为新增了几个类的成员变量或者修改了一部分代码（前提是修改完全正确）而导致程序发生错误，则应考虑是否是内存被破坏的原因了，重点排查内存是否越界。</p>
+<h3 id="段错误-segmentation-fault-和core"><a href="#段错误-segmentation-fault-和core" class="headerlink" title="段错误(segmentation fault)和core"></a>段错误(segmentation fault)和core</h3><p>当一个程序崩溃且接收到以下UNIX信号会产生core文件，它是进程运行时在突然崩溃的那一刻的一个内存快照</p>
+<table>
+<thead>
+<tr>
+<th>名字</th>
+<th>说明</th>
+<th>ANSI C POSIX.1</th>
+<th>SVR4 4.3+BSD</th>
+<th>缺省动作</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>SIGABRT</td>
+<td>异常终止(abort)</td>
+<td>.    .</td>
+<td>.   .</td>
+<td>终止w/core</td>
+</tr>
+<tr>
+<td>SIGBUS</td>
+<td>硬件故障</td>
+<td>.</td>
+<td>.   .</td>
+<td>终止w/core</td>
+</tr>
+<tr>
+<td>SIGEMT</td>
+<td>硬件故障</td>
+<td></td>
+<td>.   .</td>
+<td>终止w/core</td>
+</tr>
+<tr>
+<td>SIGFPE</td>
+<td>算术异常</td>
+<td>.    .</td>
+<td>.   .</td>
+<td>终止w/core</td>
+</tr>
+<tr>
+<td>SIGILL</td>
+<td>非法硬件指令</td>
+<td>.    .</td>
+<td>.   .</td>
+<td>终止w/core</td>
+</tr>
+<tr>
+<td>SIGIOT</td>
+<td>硬件故障</td>
+<td></td>
+<td>.   .</td>
+<td>终止w/core</td>
+</tr>
+<tr>
+<td>SIGQUIT</td>
+<td>终端退出符</td>
+<td>.</td>
+<td>.   .</td>
+<td>终止w/core</td>
+</tr>
+<tr>
+<td>SIGSEGV</td>
+<td>无效存储访问</td>
+<td>.    .</td>
+<td>.   .</td>
+<td>终止w/core</td>
+</tr>
+<tr>
+<td>SIGSYS</td>
+<td>无效系统调用</td>
+<td></td>
+<td>.   .</td>
+<td>终止w/core</td>
+</tr>
+<tr>
+<td>SIGTRAP</td>
+<td>硬件故障</td>
+<td></td>
+<td>.   .</td>
+<td>终止w/core</td>
+</tr>
+<tr>
+<td>SIGXCPU</td>
+<td>超过CPU限制(setrlimit)</td>
+<td></td>
+<td>.   .</td>
+<td>终止w/core</td>
+</tr>
+<tr>
+<td>SIGXFSZ</td>
+<td>超过文件长度限制(setrlimit)</td>
+<td></td>
+<td>.   .</td>
+<td>终止w/core</td>
+</tr>
+</tbody></table>
+<p>其中的SIGSEGV信号就是常见的段错误，段错误是指访问的内存超过了系统所给这个程序的内存空间，而<a target="_blank" rel="noopener" href="https://blog.csdn.net/u010150046/article/details/77775114">引发段错误</a>是一件十分容易的事情，比如直接给一个空指针赋值就可以</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> <span class="keyword">const</span> *argv[])</span> </span>&#123; </span><br><span class="line">    <span class="keyword">char</span> *p = <span class="literal">nullptr</span>; </span><br><span class="line">    *p = ‘a’; </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<p>运行之后就会发现多了一个core文件。有时候却发现进程虽然core了，但是找不到core文件。在linux和Solaris下是需要进行设置的。ulimit -c可以设置core文件的大小，如果这个值为0。则不会产生core文件，这个值太小，则core文件也不会产生，因为core文件一般都比较大。使用ulimit -c unlimited来设置无限大，则任意情况下都会产生core文件。查看堆栈使用<strong>bt</strong>或者<strong>where</strong>命令</p>
 
       
 
@@ -582,6 +838,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">-c++知识点</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">快速排序</a>
               </li>
             
             <div class="clearfix"></div>

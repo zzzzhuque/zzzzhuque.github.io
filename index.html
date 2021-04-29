@@ -152,6 +152,92 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-快速排序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/03/24/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/">快速排序</a>
+    </h1>
+  
+
+        
+        <a href="/2021/03/24/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/" class="archive-article-date">
+  	<time datetime="2021-03-24T07:32:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="快速排序代码"><a href="#快速排序代码" class="headerlink" title="快速排序代码"></a>快速排序代码</h1><h2 id="C-递归方法"><a href="#C-递归方法" class="headerlink" title="C++递归方法"></a>C++递归方法</h2><p>这篇博客的讲解比较详细：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/20257cf93cc1">https://www.jianshu.com/p/20257cf93cc1</a></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line">当然在最坏的情况下，仍可能是相邻的两个数进行了交换。因此快速排序的最差时间复杂度和冒泡排序是一样的都是O(N2)，它的平均时间复杂度为O(NlogN)。</span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">vector</span>;</span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::swap;</span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">cout</span>;</span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">quicksort</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;arr, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(left &gt;= right)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">int</span> i = left, j = right, pivot = arr[left];</span><br><span class="line">    <span class="keyword">while</span>(i &lt; j)&#123;                    <span class="comment">////&lt; @note 退出循环时i==j，且指向最后一个小于pivot的数</span></span><br><span class="line">        <span class="keyword">while</span>(i&lt;j &amp;&amp; arr[j]&gt;=pivot)&#123; <span class="comment">////&lt; @note 从右向左找第一个小于pivot的数</span></span><br><span class="line">            j--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span>(i&lt;j &amp;&amp; arr[i]&lt;=pivot)&#123; <span class="comment">////&lt; @note 从左向右找第一个大于pivot的数</span></span><br><span class="line">            i++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(i &lt; j)&#123;                   <span class="comment">////&lt; @note 交换位置</span></span><br><span class="line">            swap(arr[i], arr[j]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    swap(arr[left], arr[i]);				 <span class="comment">////&lt; @note 将pivot移动到i指向的位置</span></span><br><span class="line">    quicksort(arr, left, i<span class="number">-1</span>);</span><br><span class="line">    quicksort(arr, i+<span class="number">1</span>, right);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; arr = &#123;<span class="number">34</span>,<span class="number">65</span>,<span class="number">12</span>,<span class="number">43</span>,<span class="number">67</span>,<span class="number">5</span>,<span class="number">78</span>,<span class="number">10</span>,<span class="number">3</span>,<span class="number">3</span>,<span class="number">3</span>,<span class="number">70</span>&#125;;</span><br><span class="line">    quicksort(arr, <span class="number">0</span>, arr.size()<span class="number">-1</span>);</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;The sorted arrayare:&quot;</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> k=<span class="number">0</span>; k&lt;arr.size(); k++)</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;arr[k]&lt;&lt;<span class="string">&quot;, &quot;</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="python递归方法"><a href="#python递归方法" class="headerlink" title="python递归方法"></a>python递归方法</h2><p>参考链接：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/60731708">https://zhuanlan.zhihu.com/p/60731708</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">quick_sort</span>(<span class="params">arr</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;快速排序&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">if</span> len(arr) &lt; <span class="number">2</span>:</span><br><span class="line">        <span class="keyword">return</span> arr</span><br><span class="line">    <span class="comment"># 选取基准，随便选哪个都可以，选中间的便于理解</span></span><br><span class="line">    mid = arr[len(arr) // <span class="number">2</span>]</span><br><span class="line">    <span class="comment"># 定义基准值左右两个数列</span></span><br><span class="line">    left, right = [], []</span><br><span class="line">    <span class="comment"># 从原始数组中移除基准值</span></span><br><span class="line">    arr.remove(mid)</span><br><span class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> arr:</span><br><span class="line">        <span class="comment"># 大于基准值放右边</span></span><br><span class="line">        <span class="keyword">if</span> item &gt;= mid:</span><br><span class="line">            right.append(item)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment"># 小于基准值放左边</span></span><br><span class="line">            left.append(item)</span><br><span class="line">    <span class="comment"># 使用迭代进行比较</span></span><br><span class="line">    <span class="keyword">return</span> quick_sort(left) + [mid] + quick_sort(right)</span><br></pre></td></tr></table></figure>
+
+<p>参考链接中提到的插入排序：<a target="_blank" rel="noopener" href="https://www.runoob.com/python3/python-insertion-sort.html">https://www.runoob.com/python3/python-insertion-sort.html</a></p>
+<h2 id="非递归方法"><a href="#非递归方法" class="headerlink" title="非递归方法"></a>非递归方法</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">vector</span>;</span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">stack</span>;</span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::swap;</span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">cout</span>;</span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">partition</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;arr, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = left, j = right, pivot = arr[left];</span><br><span class="line">    <span class="keyword">while</span>(i &lt; j)&#123;                    <span class="comment">////&lt; @note 退出循环时i==j，且指向最后一个小于pivot的数</span></span><br><span class="line">        <span class="keyword">while</span>(i&lt;j &amp;&amp; arr[j]&gt;=pivot)&#123; <span class="comment">////&lt; @note 从右向左找第一个小于pivot的数</span></span><br><span class="line">            --j;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span>(i&lt;j &amp;&amp; arr[i]&lt;=pivot)&#123; <span class="comment">////&lt; @note 从左向右找第一个大于pivot的数</span></span><br><span class="line">            ++i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(i &lt; j)&#123;                   <span class="comment">////&lt; @note 交换位置</span></span><br><span class="line">            swap(arr[i], arr[j]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    swap(arr[left], arr[i]);         <span class="comment">////&lt; @note 将pivot移动到i指向的位置</span></span><br><span class="line">    <span class="keyword">return</span> i;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">quicksort</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;arr, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; stk;</span><br><span class="line">    stk.push(left);</span><br><span class="line">    stk.push(right);</span><br><span class="line">    <span class="keyword">while</span>(!stk.empty()) &#123;</span><br><span class="line">        <span class="keyword">int</span> rightTmp = stk.top(); stk.pop();</span><br><span class="line">        <span class="keyword">int</span> leftTmp = stk.top();  stk.pop();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> index = partition(arr, leftTmp, rightTmp);</span><br><span class="line">        <span class="keyword">if</span>((index - <span class="number">1</span>) &gt; leftTmp) &#123;   <span class="comment">////&lt; @note 左子序列</span></span><br><span class="line">            stk.push(leftTmp);</span><br><span class="line">            stk.push(index - <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>((index + <span class="number">1</span>) &lt; rightTmp) &#123;  <span class="comment">////&lt; @note 右子序列</span></span><br><span class="line">            stk.push(index + <span class="number">1</span>);</span><br><span class="line">            stk.push(rightTmp);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; arr = &#123;<span class="number">34</span>,<span class="number">65</span>,<span class="number">12</span>,<span class="number">43</span>,<span class="number">67</span>,<span class="number">5</span>,<span class="number">78</span>,<span class="number">10</span>,<span class="number">3</span>,<span class="number">3</span>,<span class="number">3</span>,<span class="number">70</span>&#125;;</span><br><span class="line">    quicksort(arr, <span class="number">0</span>, arr.size()<span class="number">-1</span>);</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;The sorted arrayare:&quot;</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> k=<span class="number">0</span>; k&lt;arr.size(); k++)</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;arr[k]&lt;&lt;<span class="string">&quot;, &quot;</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">快速排序</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/03/24/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-春招面试简历项目介绍" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -173,7 +259,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p>这份文档用于记录春招面试简历上面的项目介绍，主要内容包含自我介绍、项目简介、项目难点。</p>
-<h2 id="自我介绍"><a href="#自我介绍" class="headerlink" title="自我介绍"></a>自我介绍</h2><p>面试官好我是来自浙江大学软件学院21届的研究生朱涛。我的经历主要有两段，一个是在阿里巴巴达摩院的实习经历，一个是在浙江大学EAGLE实验室的项目经历。其中我的实习内容为虚拟人俪知的研发，我主要负责虚拟人面部重塑算法的研发以及该算法的性能加速和部署。我的项目内容为AI助盲眼镜研发，我主要负责多人在线聊天功能的开发。以上两个项目所使用的语言均为C++。生活方面我是平时比较喜欢打羽毛球，性格上也比较开朗。以上是我的自我介绍。</p>
+<h2 id="自我介绍"><a href="#自我介绍" class="headerlink" title="自我介绍"></a>自我介绍</h2><p>面试官好我是来自浙江大学软件学院21届的研究生朱涛。我的经历主要有两段，一个是在阿里巴巴达摩院的实习经历，一个是在浙江大学EAGLE实验室的项目经历。其中我的实习内容为虚拟人俪知的研发，我主要负责虚拟人面部重塑算法的研发以及该算法的性能加速和部署。我的项目内容为AI助盲眼镜研发，我主要负责多人在线聊天功能的开发。以上两个项目所使用的语言均为C++，我对于深度学习和移动端框架MNN也有一定的了解。生活方面我是平时比较喜欢打羽毛球，性格上也比较开朗。以上是我的自我介绍。</p>
 <h2 id="实习经历介绍"><a href="#实习经历介绍" class="headerlink" title="实习经历介绍"></a>实习经历介绍</h2><p>我在阿里巴巴达摩院实习了半年，实习内容为虚拟人俪知的研发。这份工作最终实现的功能是可以通过文字驱动虚拟人说话。主要开发流程为通过麦克风阵列收集人的声音，通过语音识别技术将收集到的声音转换为文字。将文字通过TTS技术转换为带有虚拟人音色的音频文件。提取该音频文件的MFCC特征，并将MFCC特征输入到LSTM网络获取代表人脸外观的256维特征向量。将256维特征向量通过逆PCA得到描述人脸形状的两万多个三维坐标。将这些三维坐标映射到二维就得到了不带牙齿的唇形根据文字改变的人脸。接下来将这张不带牙齿的人脸输入到生成对抗网络中，通过对抗生成的方式修复牙齿。将修复牙齿的人脸与牙齿库中的图片计算欧式距离，找出最匹配的牙齿进行替换，得到清晰度更高的牙齿。最后对图片做柏松融合去除图片之间的贴合痕迹。这个产品目前已经在阿里小蜜落地应用，并在浙江省人民大会堂作展示。</p>
 <h3 id="难点"><a href="#难点" class="headerlink" title="难点"></a>难点</h3><p>这个项目的难点在于算法加速和实际落地。在算法加速方面，通过多线程将一张要写的图片竖向等分成四份每一份由一个线程负责，通过RAII的思想将图片封装到类中，避免图片写入失败资源无法释放导致内存泄漏，通过bind函数将工作线程和工作函数绑定，避免类中多线程必须调用静态成员函数，这一步将算法速度提升4倍。通过实验将柏松融合的区域从全图缩减到唇部区域，这一步将算法速度提升40%。在实际落地方面，通过消息队列将任务抽象为生产者-消费者模型，其中生产者线程向消息队列中输入需要转换的文字，消费者线程从消息队列中取出文字并进程内容生成，通过锁机制避免线程之间对消息队列的争夺。通过JNI将算法封装到java接口并打包到docker中完成部署。算法模型部分主要难点在于LSTM模型叠加层数的选择，训练数据对齐。</p>
 <h2 id="项目经历介绍"><a href="#项目经历介绍" class="headerlink" title="项目经历介绍"></a>项目经历介绍</h2><p>我的项目内容是在浙江大学EAGLE实验室为期1年的AI助盲眼镜研发。这份工作最后实现的功能是通过超声波传感器提醒盲人避障，通过OCR技术帮助盲人阅读，通过语音合成技术帮助盲人交流。我所负责的开发部分为在线群聊功能，主要流程为通过拾音器采集说话人的声音并转换为文字，将文字通过TCP传输协议传输到所有其他接入群聊的助盲眼镜中，通过TTS技术将文字转换为盲人指定的声音并播放。该项目最终获得了”华为杯”第二届中国研究生人工智能创新大赛一等奖。</p>
@@ -260,9 +346,17 @@
 <h3 id="c-程序的内存分区"><a href="#c-程序的内存分区" class="headerlink" title="c++程序的内存分区"></a>c++程序的内存分区</h3><ul>
 <li>栈区：由编译器自动分配释放，存放局部变量</li>
 <li>堆区：一般由程序员分配释放，存放程序员通过<code>malloc</code>申请的内存</li>
+<li>自由存储区：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_28584889/article/details/88756489">https://blog.csdn.net/qq_28584889/article/details/88756489</a></li>
 <li>全局变量区：存放全局变量，static变量</li>
 <li>常量区：存放字符串等常量，程序结束后由系统释放</li>
 <li>代码区：存放二进制代码</li>
+</ul>
+<h3 id="指针和引用的区别"><a href="#指针和引用的区别" class="headerlink" title="指针和引用的区别"></a>指针和引用的区别</h3><ul>
+<li>指针可以有多级指针(**p)，而引用只有一级</li>
+<li>可以有const指针，但是没有const引用</li>
+<li>指针和引用使用++运算符的意义不一样</li>
+<li>指针可以被初始化为nullptr，而引用必须被初始化且必须是一个已有对象的引用</li>
+<li>指针有自己的一块空间，<strong>指针是一个变量</strong>，只不过这个变量存储的是一个地址，指向内存的一个存储单元，<strong>即指针是一个实体</strong>。而引用只是一个别名</li>
 </ul>
 <h3 id="内存对齐"><a href="#内存对齐" class="headerlink" title="内存对齐"></a>内存对齐</h3><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/30007037">https://zhuanlan.zhihu.com/p/30007037</a></p>
 <p>目前为止读到过解释得最清楚的博客</p>
@@ -274,8 +368,8 @@
 <li>修饰类的成员函数时表示该成员函数只能访问该函数自己的参数、类的静态数据成员和全局变量，不能调用普通成员函数，反过来却是可以的</li>
 </ul>
 <h3 id="const"><a href="#const" class="headerlink" title="const"></a>const</h3><h3 id="线程和进程的概念"><a href="#线程和进程的概念" class="headerlink" title="线程和进程的概念"></a>线程和进程的概念</h3><ul>
-<li>进程：在操作系统构成单独执行流的单位，占用内存空间的正在运行的程序，每个进程拥有完全独立的内存结构</li>
-<li>线程：在进程构成单独执行流的单位，线程共享数据区和堆区，独占栈区</li>
+<li>进程：在操作系统构成单独执行流的单位，占用内存空间的正在运行的程序，每个进程拥有完全独立的地址空间</li>
+<li>线程：在进程构成单独执行流的单位，线程共享数据区和堆区，独占栈区，共享进程地址空间</li>
 </ul>
 <h3 id="进程通信"><a href="#进程通信" class="headerlink" title="进程通信"></a>进程通信</h3><p>管道通信</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pipe</span><span class="params">(<span class="keyword">int</span> filedes[<span class="number">2</span>])</span></span>;</span><br></pre></td></tr></table></figure>
@@ -350,11 +444,259 @@
 <li>析构函数最好定义为虚函数，特别是对于含有继承关系的类；析构函数可以定义为纯虚函数，此时，其所在的类为抽象基类，不能创建实例化对象。</li>
 <li>虚函数对应一个vtable，这个vtable存储在<strong>对象</strong>的内存空间的。如果构造函数是虚函数，就需要通过 vtable来调用，可是对象还没有实例化，没有内存空间，无法找到vtable，所以构造函数不能是虚函数。</li>
 </ul>
+<h3 id="析构函数一般定义成虚函数"><a href="#析构函数一般定义成虚函数" class="headerlink" title="析构函数一般定义成虚函数"></a>析构函数一般定义成虚函数</h3><p>析构函数定义成虚函数是为了防止内存泄漏，因为当基类的指针或者引用指向或绑定到派生类的对象时，如果未将基类的析构函数定义成虚函数，会调用基类的析构函数，那么只能将基类的成员所占的空间释放掉，派生类中特有的就会无法释放内存空间导致内存泄漏。</p>
 <h3 id="编译过程"><a href="#编译过程" class="headerlink" title="编译过程"></a>编译过程</h3><p>编译过程分为四个过程：编译（编译预处理、编译、优化），汇编，链接。</p>
 <p>编译预处理：处理以 # 开头的指令；</p>
 <p>编译、优化：将源码 .cpp 文件翻译成 .s 汇编代码；</p>
 <p>汇编：将汇编代码 .s 翻译成机器指令 .o 文件；</p>
 <p>链接：汇编程序生成的目标文件，即 .o 文件，并不会立即执行，因为可能会出现：.cpp 文件中的函数引用了另一个 .cpp 文件中定义的符号或者调用了某个库文件中的函数。那链接的目的就是将这些文件对应的目标文件连接成一个整体，从而生成可执行的程序 .exe 文件。</p>
+<h3 id="栈和队列的区别，什么时候使用栈-队列"><a href="#栈和队列的区别，什么时候使用栈-队列" class="headerlink" title="栈和队列的区别，什么时候使用栈/队列"></a>栈和队列的区别，什么时候使用栈/队列</h3><p>栈：先进后出的结构</p>
+<p>队列：先进先出的结构</p>
+<p>栈的应用：非常广泛，在CPU内部就有提供栈这个机制。主要用途：函数调用和返回，数字转字符，表达式求值，走迷宫等等。在CPU内部栈主要是用来进行子程序调用和返回，中断时数据保存和返回。在编程语言中：主要用来进行函数的调用和返回。可以说在计算机中，只要数据的保存满足先进后出的原理，都优先考虑使用栈，所以栈是计算机中不可缺的机制。</p>
+<p>队列的应用：队列主要用在和时间有关的地方，特别是操作系统中，队列是实现多任务的重要机制。windows中的消息机制就是通过队列来实现的。进程调度也是使用队列来实现，所以队列也是一个重要的机制。只要满足数据的先进先出原理就可以使用队列。</p>
+<h3 id="CPU调度算法"><a href="#CPU调度算法" class="headerlink" title="CPU调度算法"></a>CPU调度算法</h3><ul>
+<li>先来先服务的调度算法</li>
+<li>短作业优先</li>
+<li>按时间片来轮转调度</li>
+</ul>
+<h3 id="用户态和核心态"><a href="#用户态和核心态" class="headerlink" title="用户态和核心态"></a>用户态和核心态</h3><ul>
+<li>执行TRAP指令从用户态切换到核心态</li>
+<li>内核通过<strong>指针表</strong>完成对应的系统调用</li>
+<li>控制可能会在跟随TRAP指令后面的指令中返回给用户空间库过程</li>
+<li>上述内容来自《现代操作系统 第二版》人民邮电出版社第25页</li>
+</ul>
+<h3 id="进程的几种状态"><a href="#进程的几种状态" class="headerlink" title="进程的几种状态"></a>进程的几种状态</h3><ul>
+<li>进程包含运行态、就绪态和阻塞态，其状态转换共包含四个方面</li>
+<li>运行态–&gt;阻塞态：进程为等待输入而阻塞</li>
+<li>运行态–&gt;就绪态：调度程序选择另一个进程</li>
+<li>就绪态–&gt;运行态：调度程序选择这个进程</li>
+<li>阻塞态–&gt;就绪态：出现有效输入</li>
+<li>上述内容来自《现代操作系统 第二版》人民邮电出版社第44页</li>
+</ul>
+<h3 id="OSI7层模型"><a href="#OSI7层模型" class="headerlink" title="OSI7层模型"></a>OSI7层模型</h3><ul>
+<li>物理层</li>
+<li>数据链路层</li>
+<li>网络层</li>
+<li>传输层</li>
+<li>会话层</li>
+<li>表示层</li>
+<li>应用层</li>
+</ul>
+<h3 id="HTTP-协议包括哪些请求"><a href="#HTTP-协议包括哪些请求" class="headerlink" title="HTTP 协议包括哪些请求"></a>HTTP 协议包括哪些请求</h3><ul>
+<li>GET：对服务器资源的简单请求</li>
+<li>POST：用于发送包含用户提交数据的请求</li>
+<li>HEAD：类似于GET请求，不过返回的响应中没有具体内容，用于获取报头</li>
+<li>DELETE：发出一个删除指定文档的请求</li>
+</ul>
+<h3 id="简述HTTP中GET和POST的区别"><a href="#简述HTTP中GET和POST的区别" class="headerlink" title="简述HTTP中GET和POST的区别"></a>简述HTTP中GET和POST的区别</h3><p>从原理性看：</p>
+<ul>
+<li>根据HTTP规范，GET用于信息获取，而且应该是安全和幂等的</li>
+<li>根据HTTP规范，POST表示可能修改服务器上资源的请求</li>
+</ul>
+<p>从表面上看：</p>
+<ul>
+<li>GET请求的数据会附在URL后面</li>
+<li>POST的数据放在HTTP消息体中</li>
+</ul>
+<h3 id="简述HTTP中请求消息和响应消息的结构"><a href="#简述HTTP中请求消息和响应消息的结构" class="headerlink" title="简述HTTP中请求消息和响应消息的结构"></a>简述HTTP中请求消息和响应消息的结构</h3><ul>
+<li>请求消息(request)<ul>
+<li>请求行：说明请求类别</li>
+<li>消息头：发送请求的浏览器信息、用户认证信息等关于HTTP消息的附加信息</li>
+<li>空行</li>
+<li>消息体：装有客户端向服务器端传输的数据，仅POST时插入</li>
+</ul>
+</li>
+<li>响应消息(response)<ul>
+<li>状态行：含有客户端请求的处理结果<ul>
+<li>状态码：200-OK，400请求方式错误，404-资源未发现，500-服务器内部错误</li>
+</ul>
+</li>
+<li>消息头：传输的数据类型和长度等信息</li>
+<li>空行</li>
+<li>消息体：包含客户端请求的文件数据</li>
+</ul>
+</li>
+</ul>
+<h3 id="HTTPS的概念"><a href="#HTTPS的概念" class="headerlink" title="HTTPS的概念"></a>HTTPS的概念</h3><p>http中存在的问题</p>
+<ul>
+<li>请求信息明文传输，容易被窃听截取。</li>
+<li>数据的完整性未校验，容易被篡改</li>
+<li>没有验证对方身份，存在冒充危险</li>
+</ul>
+<p>为了解决上述HTTP存在的问题，就用到了HTTPS，HTTPS 协议（HyperText Transfer Protocol over Secure Socket Layer）：一般理解为HTTP+SSL/TLS，通过 SSL证书来验证服务器的身份，并为浏览器和服务器之间的通信进行加密。SSL作用于TCP/IP协议和应用层的协议之间，TLS作用于传输层</p>
+<h3 id="HTTPS数据传输流程"><a href="#HTTPS数据传输流程" class="headerlink" title="HTTPS数据传输流程"></a>HTTPS数据传输流程</h3><ol>
+<li>首先客户端通过URL访问服务器建立SSL连接。</li>
+<li>服务端收到客户端请求后，会将网站支持的证书信息（证书中包含公钥）传送一份给客户端。</li>
+<li>客户端的服务器开始协商SSL连接的安全等级，也就是信息加密的等级。</li>
+<li>客户端的浏览器根据双方同意的安全等级，建立会话密钥，然后利用网站的公钥将会话密钥加密，并传送给网站。</li>
+<li>服务器利用自己的私钥解密出会话密钥。</li>
+<li>服务器利用会话密钥加密与客户端之间的通信。</li>
+</ol>
+<h3 id="HTTPS的缺点"><a href="#HTTPS的缺点" class="headerlink" title="HTTPS的缺点"></a>HTTPS的缺点</h3><ul>
+<li>HTTPS协议多次握手，导致页面的加载时间延长近50%</li>
+<li>HTTPS连接缓存不如HTTP高效，会增加数据开销和功耗</li>
+<li>申请SSL证书需要钱，功能越强大的证书费用越高</li>
+<li>SSL涉及到的安全算法会消耗 CPU 资源，对服务器资源消耗较大</li>
+</ul>
+<h3 id="总结HTTPS和HTTP的区别"><a href="#总结HTTPS和HTTP的区别" class="headerlink" title="总结HTTPS和HTTP的区别"></a>总结HTTPS和HTTP的区别</h3><ul>
+<li>HTTPS是HTTP协议的安全版本，HTTP协议的数据传输是明文的，是不安全的，HTTPS使用了SSL/TLS协议进行了加密处理</li>
+<li>http和https使用连接方式不同，默认端口也不一样，http是80，https是443</li>
+</ul>
+<h3 id="TCP保证数据可靠传输的方法"><a href="#TCP保证数据可靠传输的方法" class="headerlink" title="TCP保证数据可靠传输的方法"></a>TCP保证数据可靠传输的方法</h3><ul>
+<li>检验和</li>
+<li>序列号/确认应答</li>
+<li>超时重传</li>
+<li>最大消息长度</li>
+<li>滑动窗口控制<ul>
+<li>流量控制</li>
+</ul>
+</li>
+<li>拥塞控制<ul>
+<li>慢启动<ul>
+<li>当发送方每收到一个 ACK，拥塞窗口 cwnd 的大小就会加 1</li>
+</ul>
+</li>
+<li>拥塞避免</li>
+<li>拥塞发生</li>
+<li>快速恢复</li>
+</ul>
+</li>
+</ul>
+<p>参考1：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/112317245">https://zhuanlan.zhihu.com/p/112317245</a></p>
+<p>参考2：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/Tc09ovdNacOtnMOMeRc_uA">https://mp.weixin.qq.com/s/Tc09ovdNacOtnMOMeRc_uA</a></p>
+<h3 id="linux的OOM机制"><a href="#linux的OOM机制" class="headerlink" title="linux的OOM机制"></a>linux的OOM机制</h3><p>OOM是指内存溢出全称out of memory，是linux中的一种保护机制，一般由内存泄漏(memory leak)引起，比如下面的代码就会触发OOM。简单理解，内存溢出就是要求分配的内存超出了系统所给的。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">   <span class="keyword">while</span>(<span class="number">1</span>) &#123;</span><br><span class="line">	     <span class="keyword">char</span> *p = (<span class="keyword">char</span>*)<span class="built_in">malloc</span>(<span class="number">1000000</span>);</span><br><span class="line">       <span class="keyword">if</span>(<span class="literal">nullptr</span> == p)&#123;</span><br><span class="line">	         <span class="built_in">printf</span>(<span class="string">&quot;break\n&quot;</span>);</span><br><span class="line">	         <span class="keyword">break</span>;</span><br><span class="line">       &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>循环中每次申请1000000字节的数据，但不释放并且指向内存地址的指针也被不断重新赋值，在这段程序自己break之前，Linux系统会启动OOM机制将程序kill掉，并且这个过程不会产生core文件</p>
+<p>从两个方面可以观察到OOM</p>
+<ul>
+<li><p>top中可以看到MEM used数值越来越大，随后程序终止，命令行会打印出Killed</p>
+</li>
+<li><p><code>egrep -i -r &#39;killed process&#39; /var/log</code>系统日志中可以看到被kill程序的进程ID</p>
+</li>
+</ul>
+<p>进一步的，通过top命令查看内存情况会发现，当Mem满的时候程序依然运行，当Swp满的时候，程序挂了，这篇<a target="_blank" rel="noopener" href="https://blog.csdn.net/zwan0518/article/details/12059213">博文</a>介绍Swp，先挖坑，以后再看。避免OOM就需要多用智能指针和RAII</p>
+<h3 id="内存泄漏-memory-leak"><a href="#内存泄漏-memory-leak" class="headerlink" title="内存泄漏(memory leak)"></a>内存泄漏(memory leak)</h3><p>内存泄漏(memory leak)是指向系统申请分配内存进行使用（new），但是用完后不归还（delete），导致占用有效内存，可分为4类</p>
+<ul>
+<li><p>常发性内存泄漏： 引起内存泄漏的代码会被很多次执行，每次执行的时候都会导致内存泄漏</p>
+</li>
+<li><p>偶发性内存泄漏：在某些特定的环境下执行引起内存泄漏的代码，才会引起内存泄漏</p>
+</li>
+<li><p>一次性内存泄漏：代码只会执行一次，但总有一块内存发生泄漏，多见于构造类的时候，析构函数没有释放内存。</p>
+</li>
+<li><p>隐式泄漏：程序运行过程中不断的分配内存，直到结束时才释放内存，但一般服务器程序会运行较长的时间，不及时释放也会导致内存耗尽以至于内存泄漏。</p>
+</li>
+</ul>
+<h3 id="栈溢出-stack-overflow"><a href="#栈溢出-stack-overflow" class="headerlink" title="栈溢出(stack overflow)"></a>栈溢出(stack overflow)</h3><p>缓冲区溢出是指程序为了临时存取数据的需要，一般会分配一些内存空间称为缓冲区。如果向缓冲区中写入缓冲区无法容纳的数据，会造成缓冲区以外的存储单元被改写，称为缓冲区溢出。</p>
+<p>而栈溢出(stack overflow)是缓冲区溢出的一种，原理也是相同的。分为上溢出和下溢出。其中，上溢出是指栈满而又向其增加新的数据，导致数据溢出；下溢出是指栈空而又进行删除操作等，导致空间溢出。比如反复递归调用函数会导致栈溢出</p>
+<h3 id="堆溢出-heap-overflow"><a href="#堆溢出-heap-overflow" class="headerlink" title="堆溢出(heap overflow)"></a>堆溢出(heap overflow)</h3><p>导致堆溢出的操作是不断的new 一个对象，一直创建新的对象，但是不销毁。</p>
+<h3 id="内存越界"><a href="#内存越界" class="headerlink" title="内存越界"></a>内存越界</h3><p>是指向系统申请一块内存后，使用时却超出申请范围。比如一些操作内存的函数：sprintf、strcpy、strcat、vsprintf、memcpy、memset、memmove。当造成内存越界的代码运行时，所带来的错误是无法避免的，通常会造成</p>
+<ul>
+<li>破坏堆内存中分配的数据</li>
+<li>破坏程序其他对象的内存空间</li>
+<li>破坏了空闲内存块</li>
+</ul>
+<p>如果程序运行一切正常，但因为新增了几个类的成员变量或者修改了一部分代码（前提是修改完全正确）而导致程序发生错误，则应考虑是否是内存被破坏的原因了，重点排查内存是否越界。</p>
+<h3 id="段错误-segmentation-fault-和core"><a href="#段错误-segmentation-fault-和core" class="headerlink" title="段错误(segmentation fault)和core"></a>段错误(segmentation fault)和core</h3><p>当一个程序崩溃且接收到以下UNIX信号会产生core文件，它是进程运行时在突然崩溃的那一刻的一个内存快照</p>
+<table>
+<thead>
+<tr>
+<th>名字</th>
+<th>说明</th>
+<th>ANSI C POSIX.1</th>
+<th>SVR4 4.3+BSD</th>
+<th>缺省动作</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>SIGABRT</td>
+<td>异常终止(abort)</td>
+<td>.    .</td>
+<td>.   .</td>
+<td>终止w/core</td>
+</tr>
+<tr>
+<td>SIGBUS</td>
+<td>硬件故障</td>
+<td>.</td>
+<td>.   .</td>
+<td>终止w/core</td>
+</tr>
+<tr>
+<td>SIGEMT</td>
+<td>硬件故障</td>
+<td></td>
+<td>.   .</td>
+<td>终止w/core</td>
+</tr>
+<tr>
+<td>SIGFPE</td>
+<td>算术异常</td>
+<td>.    .</td>
+<td>.   .</td>
+<td>终止w/core</td>
+</tr>
+<tr>
+<td>SIGILL</td>
+<td>非法硬件指令</td>
+<td>.    .</td>
+<td>.   .</td>
+<td>终止w/core</td>
+</tr>
+<tr>
+<td>SIGIOT</td>
+<td>硬件故障</td>
+<td></td>
+<td>.   .</td>
+<td>终止w/core</td>
+</tr>
+<tr>
+<td>SIGQUIT</td>
+<td>终端退出符</td>
+<td>.</td>
+<td>.   .</td>
+<td>终止w/core</td>
+</tr>
+<tr>
+<td>SIGSEGV</td>
+<td>无效存储访问</td>
+<td>.    .</td>
+<td>.   .</td>
+<td>终止w/core</td>
+</tr>
+<tr>
+<td>SIGSYS</td>
+<td>无效系统调用</td>
+<td></td>
+<td>.   .</td>
+<td>终止w/core</td>
+</tr>
+<tr>
+<td>SIGTRAP</td>
+<td>硬件故障</td>
+<td></td>
+<td>.   .</td>
+<td>终止w/core</td>
+</tr>
+<tr>
+<td>SIGXCPU</td>
+<td>超过CPU限制(setrlimit)</td>
+<td></td>
+<td>.   .</td>
+<td>终止w/core</td>
+</tr>
+<tr>
+<td>SIGXFSZ</td>
+<td>超过文件长度限制(setrlimit)</td>
+<td></td>
+<td>.   .</td>
+<td>终止w/core</td>
+</tr>
+</tbody></table>
+<p>其中的SIGSEGV信号就是常见的段错误，段错误是指访问的内存超过了系统所给这个程序的内存空间，而<a target="_blank" rel="noopener" href="https://blog.csdn.net/u010150046/article/details/77775114">引发段错误</a>是一件十分容易的事情，比如直接给一个空指针赋值就可以</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> <span class="keyword">const</span> *argv[])</span> </span>&#123; </span><br><span class="line">    <span class="keyword">char</span> *p = <span class="literal">nullptr</span>; </span><br><span class="line">    *p = ‘a’; </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<p>运行之后就会发现多了一个core文件。有时候却发现进程虽然core了，但是找不到core文件。在linux和Solaris下是需要进行设置的。ulimit -c可以设置core文件的大小，如果这个值为0。则不会产生core文件，这个值太小，则core文件也不会产生，因为core文件一般都比较大。使用ulimit -c unlimited来设置无限大，则任意情况下都会产生core文件。查看堆栈使用<strong>bt</strong>或者<strong>where</strong>命令</p>
 
       
 
@@ -483,6 +825,10 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">回溯算法</a>
         		</li>
       		
@@ -610,7 +956,174 @@ int main() &#123;
     Solution solution;    ////&lt; @note &quot;abcnulld&quot;
     return 0;
 &#125;
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line">  </span><br><span class="line">    - </span><br><span class="line">  </span><br><span class="line">- 小米</span><br><span class="line">  </span><br><span class="line">  - 2021年3月7日未开放春招</span><br><span class="line">  </span><br><span class="line">- 作业帮</span><br><span class="line"></span><br><span class="line">  - C++相关岗位与存储有关，放弃投递</span><br><span class="line"></span><br><span class="line">- 网易</span><br><span class="line">  - 2021年3月6日官网投递，手机号：18968170679验证码登陆</span><br><span class="line">  - 招聘进展：https:&#x2F;&#x2F;campus.163.com&#x2F;app&#x2F;personal&#x2F;apply</span><br><span class="line">  </span><br><span class="line">- 腾讯</span><br><span class="line"></span><br><span class="line">- 快手</span><br><span class="line"></span><br><span class="line">- 字节</span><br><span class="line"></span><br><span class="line">- 美团</span><br><span class="line"></span><br><span class="line">- 百度</span><br><span class="line">  - 2021年3月10日投递，手机号：18968170679（百度网盘账号）</span><br><span class="line">  - 招聘进度：https:&#x2F;&#x2F;talent.baidu.com&#x2F;external&#x2F;baidu&#x2F;campus.html#&#x2F;individualCenter</span><br><span class="line">  - 招聘页有3次模拟面试机会，记得做一下</span><br><span class="line">  - 2021年3月17日安排笔试</span><br><span class="line">    - 笔试分为单选题、多选题、编程题</span><br><span class="line">    - 编程题AC0.6应该是没了</span><br><span class="line">    - 印象深刻的几道题目</span><br><span class="line">      - 观察者模式的实现</span><br><span class="line">      - SQL分组查询</span><br><span class="line">      - 用户级线程和内核级线程的区别</span><br><span class="line">      - linux内存管理</span><br><span class="line">      - 递归调用的时间复杂度计算</span><br><span class="line">      - 有数组A和B，求A中每个数小于B中数字的数量</span><br><span class="line">  </span><br><span class="line">- 京东</span><br><span class="line">  - 2021年3月4日官网投递，手机京东扫码登录</span><br><span class="line"></span><br><span class="line">  - 招聘进展：http:&#x2F;&#x2F;campus.jd.com&#x2F;web&#x2F;apply&#x2F;myjob</span><br><span class="line"></span><br><span class="line">  - 2021年3月15日第一次面试</span><br><span class="line"></span><br><span class="line">    - 声音很嘈杂，面试官挺专业，问了很多c++基础知识，但是项目问题一个都没问</span><br><span class="line"></span><br><span class="line">      - 自我介绍</span><br><span class="line"></span><br><span class="line">      - 解释static</span><br><span class="line"></span><br><span class="line">        - &gt; - 修饰全局变量时表示该变量只对定义在同一文件中的函数可见(不建议将全局变量定义在头文件中)</span><br><span class="line">          &gt; - 修饰局部变量时表示该变量的值不会因为函数终止而释放，且该局部变量在函数第一次调用时初始化</span><br><span class="line">          &gt; - 修饰函数时表示该函数只在同一文件中调用</span><br><span class="line">          &gt; - 修饰类的数据成员时表示该数据成员属于全体对象共有</span><br><span class="line">          &gt; - 修饰类的成员函数时表示该成员函数只能访问该函数自己的参数、类的静态数据成员和全局变量，不能调用普通成员函数，反过来却是可以的</span><br><span class="line"></span><br><span class="line">      - 解释const</span><br><span class="line"></span><br><span class="line">        - &gt; **作用**：</span><br><span class="line">          &gt;</span><br><span class="line">          &gt; const 修饰成员变量，定义成 const 常量，相较于宏常量，可进行类型检查，节省内存空间，提高了效率。</span><br><span class="line">          &gt; const 修饰函数参数，使得传递过来的函数参数的值不能改变。</span><br><span class="line">          &gt; const 修饰成员函数，使得成员函数不能修改任何类型的成员变量（mutable 修饰的变量除外），也不能调用非 const 成员函数，因为非 const 成员函数可能会修改成员变量。</span><br><span class="line">          &gt;</span><br><span class="line">          &gt; 在类中的用法：</span><br><span class="line">          &gt;</span><br><span class="line">          &gt; **const 成员变量**：</span><br><span class="line">          &gt;</span><br><span class="line">          &gt; const 成员变量只能在类内声明、定义，在构造函数初始化列表中初始化。</span><br><span class="line">          &gt; const 成员变量只在某个对象的生存周期内是常量，对于整个类而言却是可变的，因为类可以创建多个对象，不同类的 const 成员变量的值是不同的。因此不能在类的声明中初始化 const 成员变量，类的对象还没有创建，编译器不知道他的值。</span><br><span class="line">          &gt; **const 成员函数**：</span><br><span class="line">          &gt;</span><br><span class="line">          &gt; 不能修改成员变量的值，除非有 mutable 修饰；只能访问成员变量。</span><br><span class="line">          &gt; 不能调用非常量成员函数，以防修改成员变量的值。</span><br><span class="line"></span><br><span class="line">          &#96;&#96;&#96;cpp</span><br><span class="line">          class A &#123;</span><br><span class="line">          public:</span><br><span class="line">              int var;</span><br><span class="line">          </span><br><span class="line">              void fun(int tmp) &#123;</span><br><span class="line">                  var &#x3D; tmp;</span><br><span class="line">              &#125;</span><br><span class="line">          </span><br><span class="line">              A(int tmp) : var(tmp) &#123;&#125;</span><br><span class="line">          </span><br><span class="line">              void c_fun(int tmp) const &#123; &#x2F;&#x2F;&#x2F;&#x2F;&lt; @attention const 成员函数</span><br><span class="line">                  var &#x3D; tmp;              &#x2F;&#x2F;&#x2F;&#x2F;&lt; @attention error: 在 const 成员函数中，不能修改任何类成员变量。</span><br><span class="line">                  fun(tmp);               &#x2F;&#x2F;&#x2F;&#x2F;&lt; @attention error: const 成员函数不能调用非 const 成员函数，因为非 const 成员函数可能会修改成员变量。</span><br><span class="line">              &#125;</span><br><span class="line">          &#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 3月24日一面</span><br><span class="line"></span><br><span class="line">  - 整体感受：看了牛客面经说就聊聊项目谈天说地，很水。不过我面的时候面试官很专业既问了项目也问了基础知识。最后关于Linux推荐了两本书《奔跑吧Linux内核》《深入Linux内核架构》(人民邮电出版社)</span><br><span class="line"></span><br><span class="line">    - 介绍RAII的思想</span><br><span class="line"></span><br><span class="line">    - 如何将unique_ptr赋值给另一个</span><br><span class="line"></span><br><span class="line">    - &#96;&#96;&#96;cpp</span><br><span class="line">      #include &lt;string&gt;</span><br><span class="line">      </span><br><span class="line">      class Person &#123;</span><br><span class="line">      private:</span><br><span class="line">          std::string name;</span><br><span class="line">          std::string address;</span><br><span class="line">      </span><br><span class="line">      public:</span><br><span class="line">          Person();</span><br><span class="line">          virtual ~Person();</span><br><span class="line">      &#125;;</span><br><span class="line">      </span><br><span class="line">      class Student : public Person&#123;</span><br><span class="line">      private:</span><br><span class="line">          std::string schoolName;</span><br><span class="line">          std::string schoolAddr;</span><br><span class="line">      </span><br><span class="line">      public:</span><br><span class="line">          Student();</span><br><span class="line">          ~Student();</span><br><span class="line">      &#125;;</span><br><span class="line">      </span><br><span class="line">      bool isValidClass(Student s);</span><br><span class="line">      </span><br><span class="line">      int main() &#123;</span><br><span class="line">          Student s;</span><br><span class="line">          isValidClass(s);</span><br><span class="line">          return 0;</span><br><span class="line">      &#125;</span><br><span class="line">      &#x2F;*</span><br><span class="line">      问：这样写有什么问题？</span><br><span class="line">      答：isValidClass(const Student &amp;s)应该使用常量引用，因为在值传递的过程中会经历两次构造和两次析构，十分耗时</span><br><span class="line">      *&#x2F;</span><br></pre></td></tr></table></figure>
+
+- 简单介绍移动构造的概念
+
+- 编程题两数之和</code></pre>
+</li>
+</ul>
+</li>
+<li><p>3月26日二面</p>
+<ul>
+<li>聊项目</li>
+<li>智力题：公司里电梯需求量很大，如何在不加装电梯的情况下减小负载</li>
+</ul>
+</li>
+<li><p>3月31日HR面</p>
+<ul>
+<li>聊聊职业规划</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>小米</p>
+<ul>
+<li>2021年3月29日官网投递，牛客找到内推码</li>
+<li>招聘进展：<a target="_blank" rel="noopener" href="https://app.mokahr.com/campus_apply/xiaomi/286#/candidateHome/applications">https://app.mokahr.com/campus_apply/xiaomi/286#/candidateHome/applications</a></li>
+<li>2021年4月12日一面<ul>
+<li>聊项目</li>
+<li>三次握手和四次挥手，以及为什么挥手比握手多一次</li>
+<li>JNI当中的地址空间由JVM分配吗<ul>
+<li>局部变量通过局部引用表管理，当退出作用域时JVM会根据该表释放内存</li>
+<li>涉及到多线程使用JavaVM的AttachCurrentThread方法附加原生线程，然后在线程结束的时候使用DetachCurrentThread去解除附加</li>
+<li>局部变量调用<code>env-&gt;NewGlobalRef</code>转换为全局变量，调用DeleteGlobalRef后失效</li>
+<li>弱全局引用和全局引用类似，可以跨线程，它使用NewGlobalWeakRef创建,使用DeleteGlobalWeakRef释放。但是弱全局引用会被gc回收，所以在使用的时候需要先判断它是否已经被回收</li>
+<li>Ref：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/787053d11dfd">https://www.jianshu.com/p/787053d11dfd</a></li>
+</ul>
+</li>
+<li>编程题：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/reverse-linked-list-ii/">92. 反转链表 II</a></li>
+</ul>
+</li>
+<li>2021年4月17日二面<ul>
+<li>不判断栈空，实现下溢出避免</li>
+<li>重载和重写(覆盖)和隐藏的区别，尽量详细<ul>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/tianzeng/p/9775672.html">https://www.cnblogs.com/tianzeng/p/9775672.html</a></li>
+</ul>
+</li>
+<li>动态绑定和静态绑定<ul>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/lizhenghn/p/3657717.html">https://www.cnblogs.com/lizhenghn/p/3657717.html</a></li>
+</ul>
+</li>
+<li>通过条件变量唤醒一条线程</li>
+<li>手写单例模式，注意volatile的作用</li>
+<li>编程题1：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/kth-smallest-element-in-a-bst/">230. 二叉搜索树中第K小的元素</a></li>
+<li>编程题2：请输出二叉搜索树每个节点累加的结果，累加的规则为该节点值加上大于该节点的所有值，比如二叉搜索树为[2,1,3]，则累加后输出为[6,5,3]。    </li>
+</ul>
+</li>
+<li>2021年4月29日三面<ul>
+<li>自我介绍</li>
+<li>编程题：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/intersection-of-two-linked-lists/">160. 相交链表</a></li>
+<li>如何用c语言实现封装继承多态</li>
+<li>介绍C++的智能指针</li>
+<li>聊人生</li>
+</ul>
+</li>
+<li>2021年4月29日OC</li>
+</ul>
+</li>
+<li><p>作业帮</p>
+<ul>
+<li>C++相关岗位与存储有关，放弃投递</li>
+</ul>
+</li>
+<li><p>网易</p>
+<ul>
+<li>2021年3月6日官网投递，手机号：18968170679验证码登陆</li>
+<li>招聘进展：<a target="_blank" rel="noopener" href="https://campus.163.com/app/personal/apply">https://campus.163.com/app/personal/apply</a></li>
+</ul>
+</li>
+<li><p>腾讯</p>
+<ul>
+<li>2021年4月1日官网投递，微信扫码登陆</li>
+<li>招聘进展：<a target="_blank" rel="noopener" href="https://join.qq.com/center.html">https://join.qq.com/center.html</a></li>
+<li>2021年4月12日一面，KPI面，面完就挂了。。。<ul>
+<li>如何保证消息的顺序，比如A先说B后说，但是B的消息先传输的服务器立即转发就会导致B的内容先出来</li>
+<li>进程通信的方法和优劣</li>
+<li>编程题：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/er-cha-shu-de-shen-du-lcof/">剑指 Offer 55 - I. 二叉树的深度</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>快手</p>
+<ul>
+<li><p>2021年4月1日官网投递，手机验证码登陆</p>
+</li>
+<li><p>招聘进展：<a target="_blank" rel="noopener" href="https://campus.kuaishou.cn/#/campus/my-apply">https://campus.kuaishou.cn/#/campus/my-apply</a></p>
+</li>
+<li><p>2021年4月10日一面</p>
+<ul>
+<li>进程的几种状态和转换<ul>
+<li>进程包含运行态、就绪态和阻塞态，其状态转换共包含四个方面</li>
+<li>运行态–&gt;阻塞态：进程为等待输入而阻塞</li>
+<li>运行态–&gt;就绪态：调度程序选择另一个进程</li>
+<li>就绪态–&gt;运行态：调度程序选择这个进程</li>
+<li>阻塞态–&gt;就绪态：出现有效输入</li>
+<li>上述内容来自《现代操作系统 第二版》人民邮电出版社第44页</li>
+</ul>
+</li>
+<li>HTTP和HTTPS的区别</li>
+<li>用户态和核心态<ul>
+<li>执行TRAP指令从用户态切换到核心态</li>
+<li>内核通过<strong>指针表</strong>完成对应的系统调用</li>
+<li>控制可能会在跟随TRAP指令后面的指令中返回给用户空间库过程</li>
+<li>上述内容来自《现代操作系统 第二版》人民邮电出版社第25页</li>
+</ul>
+</li>
+<li>计算机网络的7层结构</li>
+<li>cpu调度算法</li>
+<li>线程和进程的概念和区别</li>
+<li>进程通信</li>
+<li>TCP如何保证可靠传输</li>
+<li>死锁和防止</li>
+<li>编程题：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/shun-shi-zhen-da-yin-ju-zhen-lcof/">剑指 Offer 29. 顺时针打印矩阵</a></li>
+</ul>
+</li>
+<li><p>2021年4月12日二面</p>
+<ul>
+<li>聊项目</li>
+<li>问一面时答的不好的问题</li>
+<li>虚拟内存<ul>
+<li>虚拟内存是计算机系统内存管理的一种技术。它使得应用程序认为它拥有连续可用的内存（一个连续完整的地址空间），而实际上，它通常是被分隔成多个物理内存碎片，还有部分暂时存储在外部磁盘存储器上，在需要时进行数据交换</li>
+<li>物理内存的容量是固定的，但是寻址空间却取决于cpu地址线条数，如32位机，则寻址空间为2^32 = 4G，所以最大支只持4G的寻址空间，即使插了8G的内存条也只能使用4G内存</li>
+<li>操作系统向进程描述了一个完整的连续的虚拟地址空间供进程使用，但是在物理内存中进程数据的存储采用离散式存储(提高内存利用率)，但是其实虚拟内存和物理内存之间的关系并不像上图中那样直接，其中还需要使用页表映射虚拟地址与物理地址的映射关系，并且通过页表实现内存访问控制。</li>
+<li>页表是一种特殊的数据结构，存放着各个虚拟页的状态，是否映射，是否缓存.。进程要知道哪些内存地址上的数据在物理内存上，哪些不在，还有在物理内存上的哪里，这就需要用页表来记录</li>
+</ul>
+</li>
+<li>HTTPS中间截获攻击</li>
+<li>TRAP指令和CPU时间片的关系</li>
+<li>编程题：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/compare-version-numbers/">165. 比较版本号</a></li>
+</ul>
+</li>
+<li><p>2021年4月13日三面</p>
+<ul>
+<li><p>聊项目</p>
+</li>
+<li><p>TCP如何保证可靠传输</p>
+</li>
+<li><p>TCP数据包的序列号如何生成</p>
+<ul>
+<li>发送端的数据包序列号随机生成，确认号为对方的序列号+1</li>
+</ul>
+</li>
+<li><p>编程题：已知一个随机数发生器A，产生0的概率是p，产生1的概率是1-p，要求构造产生0，1概率分别为0.5的随机数生成器B</p>
+</li>
+<li><pre><code class="cpp">/*
+https://blog.csdn.net/huazhongkejidaxuezpp/article/details/20904689?ivk_sa=1024320u
+*/
+int Rand() &#123;
+    int first = rand();
+    int second = rand();
+    while (true) &#123;
+        if(first==0 &amp;&amp; second==1)
+            return 1;
+        else if(first==1 &amp;&amp; second==0)
+            return 0;  
+        else  
+            continue;
+    &#125;
+&#125;
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  - 2021年4月15日HR面</span><br><span class="line"></span><br><span class="line">    - 十分专业的HR面</span><br><span class="line">    - 聊项目</span><br><span class="line">    - 聊薪资</span><br><span class="line"></span><br><span class="line">- 字节</span><br><span class="line"></span><br><span class="line">  - 2021年3月26日官网投递，手机验证码登陆</span><br><span class="line">  - 招聘进展：https:&#x2F;&#x2F;jobs.bytedance.com&#x2F;campus&#x2F;position&#x2F;application</span><br><span class="line">  - 2021年4月20日约面，但是已经不想面了，就拒绝了</span><br><span class="line"></span><br><span class="line">- 美团</span><br><span class="line"></span><br><span class="line">  - 没有特别match的岗位，放弃投递</span><br><span class="line"></span><br><span class="line">- 百度</span><br><span class="line">  - 2021年3月10日投递，手机号：18968170679（百度网盘账号）</span><br><span class="line">  - 招聘进度：https:&#x2F;&#x2F;talent.baidu.com&#x2F;external&#x2F;baidu&#x2F;campus.html#&#x2F;individualCenter</span><br><span class="line">  - 招聘页有3次模拟面试机会，记得做一下</span><br><span class="line">  - 2021年3月17日安排笔试</span><br><span class="line">    - 笔试分为单选题、多选题、编程题</span><br><span class="line">    - 编程题AC0.6应该是没了</span><br><span class="line">    - 印象深刻的几道题目</span><br><span class="line">      - 观察者模式的实现</span><br><span class="line">      </span><br><span class="line">        - &gt; 定义对象之间的一种一对多的依赖关系，使得每当一个对象状态发生改变时，其相关依赖对象都得到通知并被自动更新。</span><br><span class="line">          &gt;</span><br><span class="line">          &gt; 抽象目标：定义了一个观察者的集合；声明了通知方法notify()</span><br><span class="line">          &gt;</span><br><span class="line">          &gt; 具体目标：实现了通知方法notify()</span><br><span class="line">          &gt;</span><br><span class="line">          &gt; 抽象观察者：声明了针对notify()的方法update()</span><br><span class="line">          &gt;</span><br><span class="line">          &gt; 具体观察者：实现了更新方法update()，实现了观察入口call()函数</span><br><span class="line">      </span><br><span class="line">      - SQL分组查询</span><br><span class="line">      </span><br><span class="line">      - 用户级线程和内核级线程的区别</span><br><span class="line">      </span><br><span class="line">      - linux内存管理</span><br><span class="line">      </span><br><span class="line">      - 递归调用的时间复杂度计算</span><br><span class="line">      </span><br><span class="line">      - 有数组A和B，求A中每个数小于B中数字的数量</span><br><span class="line">    </span><br><span class="line">  - 2021年3月29日，本以为凉了，没想到又发来一个社招测评</span><br><span class="line">  </span><br><span class="line">- 京东</span><br><span class="line">  - 2021年3月4日官网投递，手机京东扫码登录</span><br><span class="line"></span><br><span class="line">  - 招聘进展：http:&#x2F;&#x2F;campus.jd.com&#x2F;web&#x2F;apply&#x2F;myjob</span><br><span class="line"></span><br><span class="line">  - 2021年3月15日第一次面试</span><br><span class="line"></span><br><span class="line">    - 声音很嘈杂，面试官挺专业，问了很多c++基础知识，但是项目问题一个都没问</span><br><span class="line"></span><br><span class="line">      - 自我介绍</span><br><span class="line"></span><br><span class="line">      - 解释static</span><br><span class="line"></span><br><span class="line">        - &gt; - 修饰全局变量时表示该变量只对定义在同一文件中的函数可见(不建议将全局变量定义在头文件中)</span><br><span class="line">          &gt; - 修饰局部变量时表示该变量的值不会因为函数终止而释放，且该局部变量在函数第一次调用时初始化</span><br><span class="line">          &gt; - 修饰函数时表示该函数只在同一文件中调用</span><br><span class="line">          &gt; - 修饰类的数据成员时表示该数据成员属于全体对象共有</span><br><span class="line">          &gt; - 修饰类的成员函数时表示该成员函数只能访问该函数自己的参数、类的静态数据成员和全局变量，不能调用普通成员函数，反过来却是可以的</span><br><span class="line"></span><br><span class="line">      - 解释const</span><br><span class="line"></span><br><span class="line">        - &gt; **作用**：</span><br><span class="line">          &gt;</span><br><span class="line">          &gt; const 修饰成员变量，定义成 const 常量，相较于宏常量，可进行类型检查，节省内存空间，提高了效率。</span><br><span class="line">          &gt; const 修饰函数参数，使得传递过来的函数参数的值不能改变。</span><br><span class="line">          &gt; const 修饰成员函数，使得成员函数不能修改任何类型的成员变量（mutable 修饰的变量除外），也不能调用非 const 成员函数，因为非 const 成员函数可能会修改成员变量。</span><br><span class="line">          &gt;</span><br><span class="line">          &gt; 在类中的用法：</span><br><span class="line">          &gt;</span><br><span class="line">          &gt; **const 成员变量**：</span><br><span class="line">          &gt;</span><br><span class="line">          &gt; const 成员变量只能在类内声明、定义，在构造函数初始化列表中初始化。</span><br><span class="line">          &gt; const 成员变量只在某个对象的生存周期内是常量，对于整个类而言却是可变的，因为类可以创建多个对象，不同类的 const 成员变量的值是不同的。因此不能在类的声明中初始化 const 成员变量，类的对象还没有创建，编译器不知道他的值。</span><br><span class="line">          &gt; **const 成员函数**：</span><br><span class="line">          &gt;</span><br><span class="line">          &gt; 不能修改成员变量的值，除非有 mutable 修饰；只能访问成员变量。</span><br><span class="line">          &gt; 不能调用非常量成员函数，以防修改成员变量的值。</span><br><span class="line"></span><br><span class="line">          &#96;&#96;&#96;cpp</span><br><span class="line">          class A &#123;</span><br><span class="line">          public:</span><br><span class="line">              int var;</span><br><span class="line">          </span><br><span class="line">              void fun(int tmp) &#123;</span><br><span class="line">                  var &#x3D; tmp;</span><br><span class="line">              &#125;</span><br><span class="line">          </span><br><span class="line">              A(int tmp) : var(tmp) &#123;&#125;</span><br><span class="line">          </span><br><span class="line">              void c_fun(int tmp) const &#123; &#x2F;&#x2F;&#x2F;&#x2F;&lt; @attention const 成员函数</span><br><span class="line">                  var &#x3D; tmp;              &#x2F;&#x2F;&#x2F;&#x2F;&lt; @attention error: 在 const 成员函数中，不能修改任何类成员变量。</span><br><span class="line">                  fun(tmp);               &#x2F;&#x2F;&#x2F;&#x2F;&lt; @attention error: const 成员函数不能调用非 const 成员函数，因为非 const 成员函数可能会修改成员变量。</span><br><span class="line">              &#125;</span><br><span class="line">          &#125;;</span><br></pre></td></tr></table></figure>
 
 - 解释引用和指针的区别
 
@@ -725,9 +1238,9 @@ int main() &#123;
 - 三个有序数组，如何快速找出交集
 
   - ```cpp
-/*
+    /*
      * 每个数组一个指针，碰到全部相等的数字就加入结果
- */
+     */
     class Solution &#123;
     public:
         vector&lt;int&gt; arraysIntersection(vector&lt;int&gt;&amp; arr1, vector&lt;int&gt;&amp; arr2, vector&lt;int&gt;&amp; arr3) &#123;
@@ -751,7 +1264,7 @@ int main() &#123;
             return res;
         &#125;
     &#125;;
-    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">  </span><br><span class="line">- 3月17日第二次面试，凉凉</span><br><span class="line"></span><br><span class="line">  - 自我介绍</span><br><span class="line"></span><br><span class="line">  - 有一个长度为100万的有序数组，请判断其中是否存在和为target的情况，有返回true，没有返回false</span><br><span class="line"></span><br><span class="line">    - &#96;&#96;&#96;cpp</span><br><span class="line">      class Solution &#123;	&#x2F;&#x2F;&#x2F;&#x2F;&lt; @note 双指针法</span><br><span class="line">      public:</span><br><span class="line">          vector&lt;int&gt; twoSum(vector&lt;int&gt;&amp; numbers, int target) &#123;</span><br><span class="line">              int start &#x3D; 0, end &#x3D; numbers.size()-1;</span><br><span class="line">              while (start &lt; end) &#123;</span><br><span class="line">                  int sum &#x3D; numbers[start] + numbers[end];</span><br><span class="line">                  if (sum &gt; target) &#123;</span><br><span class="line">                  --end;</span><br><span class="line">                  &#125; else if (sum &lt; target) &#123;</span><br><span class="line">                  ++start;</span><br><span class="line">                  &#125; else &#123;</span><br><span class="line">                  return &#123;start+1, end+1&#125;;</span><br><span class="line">                  &#125;</span><br><span class="line">          &#125;</span><br><span class="line">              return &#123;&#125;;</span><br><span class="line">      &#125;</span><br><span class="line">      &#125;;</span><br><span class="line"></span><br><span class="line">      class Solution &#123;	&#x2F;&#x2F;&#x2F;&#x2F;&lt; @note 二分法</span><br><span class="line">  public:</span><br><span class="line">          vector&lt;int&gt; twoSum(vector&lt;int&gt;&amp; numbers, int target) &#123;</span><br><span class="line">          for (int i &#x3D; 0; i &lt; numbers.size(); ++i) &#123;</span><br><span class="line">                  int start &#x3D; i+1, end &#x3D; numbers.size()-1;</span><br><span class="line">                  while (start &lt;&#x3D; end) &#123;</span><br><span class="line">                      int mid &#x3D; start + (end-start)&#x2F;2;</span><br><span class="line">                      if (numbers[i]+numbers[mid] &#x3D;&#x3D; target) &#123;</span><br><span class="line">                          return &#123;i+1, mid+1&#125;;</span><br><span class="line">                      &#125; else if (numbers[i]+numbers[mid] &gt; target) &#123;</span><br><span class="line">                          end &#x3D; mid-1;</span><br><span class="line">                      &#125; else &#123;</span><br><span class="line">                          start &#x3D; mid+1;</span><br><span class="line">                    &#125;</span><br><span class="line">                  &#125;</span><br><span class="line">              &#125;</span><br><span class="line">              return &#123;-1, -1&#125;;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;;</span><br></pre></td></tr></table></figure>
+    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">  </span><br><span class="line">- 3月17日第二次面试，凉凉</span><br><span class="line"></span><br><span class="line">  - 自我介绍</span><br><span class="line"></span><br><span class="line">  - 有一个长度为100万的有序数组，请判断其中是否存在和为target的情况，有返回true，没有返回false</span><br><span class="line"></span><br><span class="line">    - &#96;&#96;&#96;cpp</span><br><span class="line">      class Solution &#123;	&#x2F;&#x2F;&#x2F;&#x2F;&lt; @note 双指针法</span><br><span class="line">      public:</span><br><span class="line">          vector&lt;int&gt; twoSum(vector&lt;int&gt;&amp; numbers, int target) &#123;</span><br><span class="line">              int start &#x3D; 0, end &#x3D; numbers.size()-1;</span><br><span class="line">              while (start &lt; end) &#123;</span><br><span class="line">                  int sum &#x3D; numbers[start] + numbers[end];</span><br><span class="line">                  if (sum &gt; target) &#123;</span><br><span class="line">                  --end;</span><br><span class="line">                  &#125; else if (sum &lt; target) &#123;</span><br><span class="line">                  ++start;</span><br><span class="line">                  &#125; else &#123;</span><br><span class="line">                  return &#123;start+1, end+1&#125;;</span><br><span class="line">                  &#125;</span><br><span class="line">          &#125;</span><br><span class="line">              return &#123;&#125;;</span><br><span class="line">      &#125;</span><br><span class="line">      &#125;;</span><br><span class="line">    </span><br><span class="line">      class Solution &#123;	&#x2F;&#x2F;&#x2F;&#x2F;&lt; @note 二分法</span><br><span class="line">    public:</span><br><span class="line">          vector&lt;int&gt; twoSum(vector&lt;int&gt;&amp; numbers, int target) &#123;</span><br><span class="line">          for (int i &#x3D; 0; i &lt; numbers.size(); ++i) &#123;</span><br><span class="line">                  int start &#x3D; i+1, end &#x3D; numbers.size()-1;</span><br><span class="line">                  while (start &lt;&#x3D; end) &#123;</span><br><span class="line">                      int mid &#x3D; start + (end-start)&#x2F;2;</span><br><span class="line">                      if (numbers[i]+numbers[mid] &#x3D;&#x3D; target) &#123;</span><br><span class="line">                          return &#123;i+1, mid+1&#125;;</span><br><span class="line">                      &#125; else if (numbers[i]+numbers[mid] &gt; target) &#123;</span><br><span class="line">                          end &#x3D; mid-1;</span><br><span class="line">                      &#125; else &#123;</span><br><span class="line">                          start &#x3D; mid+1;</span><br><span class="line">                    &#125;</span><br><span class="line">                  &#125;</span><br><span class="line">              &#125;</span><br><span class="line">              return &#123;-1, -1&#125;;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;;</span><br></pre></td></tr></table></figure>
 
     这道题二分法或许一下子反应不过来，但是双指针法我都没做出来那可太拉垮了，主要还是面的太少，紧张了
 
@@ -766,7 +1279,7 @@ int main() &#123;
     &gt; 3. A收到B的确认信号，并向B发送确认信号：A——&gt;B。
   &gt;
     &gt; 三次握手大概就是这么个过程。
-  &gt;  通过第一次握手，B知道A能够发送数据。通过第二次握手，A知道B能发送数据。结合第一次握手和第二次握手，A知道B能接收数据。结合第三次握手，B知道A能够接收数据。
+  &gt; 通过第一次握手，B知道A能够发送数据。通过第二次握手，A知道B能发送数据。结合第一次握手和第二次握手，A知道B能接收数据。结合第三次握手，B知道A能够接收数据。
     &gt;
     &gt; 至此，完成了握手过程，A知道B能收能发，B知道A能收能发，通信连接至此建立。三次连接是保证可靠的最小握手次数，再多次握手也不能提高通信成功的概率，反而浪费资源。
     &gt;
@@ -812,37 +1325,35 @@ int main() &#123;
     default
     lambda
     智能指针
-    ```</code></pre>
+    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 小红书</span><br><span class="line">  </span><br><span class="line">  - 估值200亿，相对较低，思索之后决定放弃投递</span><br><span class="line">  </span><br><span class="line">- 猿辅导</span><br><span class="line">  </span><br><span class="line">  - 服务器开发以java为主，放弃投递</span><br><span class="line">  </span><br><span class="line">- b站</span><br><span class="line">  </span><br><span class="line">  - 服务器开发以java为主，放弃投递</span><br><span class="line">  </span><br><span class="line">- 拼多多</span><br><span class="line">  - 2021年3月12日官网投递，账号：18968170679验证码登陆</span><br><span class="line">  - 招聘进展：https:&#x2F;&#x2F;careers.pinduoduo.com&#x2F;campus&#x2F;personal-center</span><br><span class="line">  </span><br><span class="line">- 海康威视</span><br><span class="line">  - 2021年3月3日官网投递，手机号：18968170679 密码：Zt008551</span><br><span class="line">  </span><br><span class="line">  - 招聘进展：https:&#x2F;&#x2F;campushr.hikvision.com&#x2F;myDelivery.html</span><br><span class="line">  </span><br><span class="line">  - 2021年3月30日没有邮件通知，突如其来的一面</span><br><span class="line">    </span><br><span class="line">    - 归并排序属于数据无关，可并行加速</span><br><span class="line">    - delete和free的区别</span><br><span class="line">      - 前者会调用析构函数，后者不会</span><br><span class="line">    - 虚函数表是否存储在对象中</span><br><span class="line">      - 虚函数表创建时机是在编译期间。编译期间编译器就为**每个类**确定好了对应的虚函数表里的内容。</span><br><span class="line">      - 虚函数表存在于.rodata段</span><br><span class="line">    - 指针的大小</span><br><span class="line">      - 32位系统4字节</span><br><span class="line">      - 64位系统8字节</span><br><span class="line">    </span><br><span class="line">  - 2021年3月31日安排了二面</span><br><span class="line">  </span><br><span class="line">    - STL6大组件</span><br><span class="line">  </span><br><span class="line">      - STL大致分为六大模块：容器（container），算法（algorithm），迭代器（iterator），仿函数（functor），适配器（adapter），配置器（allocator）。其中仿函数是体积最小，观念最简单，但是在stl算法的搭配中起到了非常重要的作用，这是与简单的lambda或者指针函数所不同的。</span><br><span class="line">      - 仿函数：模仿函数的类，使用方式如同函数。本质是类中重载括弧运算符&#96;operator()&#96;。</span><br><span class="line">  </span><br><span class="line">    - auto的坏处(这个问题没有回答出来，反问的时候面试官表示他也不知道...)</span><br><span class="line">  </span><br><span class="line">      - 会带来未定义错误</span><br><span class="line">  </span><br><span class="line">      - &#96;&#96;&#96;cpp</span><br><span class="line">        &#x2F;&#x2F;&#x2F;&#x2F;&lt; @note 没问题</span><br><span class="line">        std::vector&lt;bool&gt; features(const Widget&amp; w);</span><br><span class="line">        Widget w;</span><br><span class="line">        ...</span><br><span class="line">        bool highPriority &#x3D; features(w)[5];</span><br><span class="line">        ...</span><br><span class="line">        processWidget(w, highPriority);</span><br><span class="line">        </span><br><span class="line">        &#x2F;&#x2F;&#x2F;&#x2F;&lt; @note 出错</span><br><span class="line">        auto highPriority &#x3D; features(w)[5];</span><br><span class="line">        ...</span><br><span class="line">        processWidget(w, highPriority); &#x2F;&#x2F; undefined behavior!</span><br></pre></td></tr></table></figure></code></pre>
 </li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>小红书</p>
+<li><p>map和unordered_map的底层实现</p>
 <ul>
-<li>估值200亿，相对较低，思索之后决定放弃投递</li>
+<li>实现方式：unordered_map内部是一个hash_table一般是由一个大vector元素节点挂接链表来解决冲突。map的内部实现是二叉平衡树(红黑树)，可在O(logN) 时间内完成查找、增加、删除操作</li>
+<li>运行效率方面：unordered_map查找更快，map插入和删除更快</li>
+<li>占用内存方面：map内存占用略低，unordered_map内存占用略高，而且是线性成比例的</li>
+<li>使用选择方面：需要无序容器，快速查找删除，不担心略高的内存时用unordered_map；需要有序容器插入和删除操作居多，内存在意的时候用map</li>
 </ul>
 </li>
-<li><p>猿辅导</p>
+<li><p>set和unordered_set的底层实现</p>
 <ul>
-<li>服务器开发以java为主，放弃投递</li>
+<li>实现方式：set通过红黑树实现，插入、查找、删除的平均复杂度都是O(logn)。unordered_set通过哈希表实现，容器的插入、查找、删除，正常情况下复杂度是O(1)，最坏情况下时间复杂度是O(n)</li>
 </ul>
 </li>
-<li><p>b站</p>
+<li><p>C++程序崩溃的主要解决方法</p>
 <ul>
-<li>服务器开发以java为主，放弃投递</li>
+<li>异常捕获</li>
+<li>gdb</li>
+<li>多打日志</li>
 </ul>
 </li>
-<li><p>拼多多</p>
+<li><p>C++多态，除了虚函数还有哪些</p>
 <ul>
-<li>2021年3月12日官网投递，账号：18968170679验证码登陆</li>
-<li>招聘进展：<a target="_blank" rel="noopener" href="https://careers.pinduoduo.com/campus/personal-center">https://careers.pinduoduo.com/campus/personal-center</a></li>
+<li>运行时多态和编译时多态，说实话我感觉这个问题是面试官在唬我，除了这两个多态还有什么别的多态内容呢？</li>
 </ul>
 </li>
-<li><p>海康威视</p>
-<ul>
-<li>2021年3月3日官网投递，手机号：18968170679 密码：Zt008551</li>
-<li>招聘进展：<a target="_blank" rel="noopener" href="https://campushr.hikvision.com/myDelivery.html">https://campushr.hikvision.com/myDelivery.html</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><p>同花顺</p>
@@ -856,13 +1367,32 @@ int main() &#123;
 <ul>
 <li>2021年3月9日官网投递，微信登陆</li>
 <li>招聘进展：<a target="_blank" rel="noopener" href="https://join.mihoyo.com/#/candidateHome/applications">https://join.mihoyo.com/#/candidateHome/applications</a></li>
-<li>2021年3月10日通过了简历初筛，搞笑的是，给我发了一个pdf，里面有一个处理图片的任务需要在收到建立后的7天内完成，强烈怀疑是公司内部某个组的子任务</li>
+<li>2021年3月10日通过了简历初筛，搞笑的是，给我发了一个pdf，里面有一个处理图片的任务需要在收到简历后的7天内完成，强烈怀疑是公司内部某个组的子任务</li>
 <li>2021年3月16日完成笔试，笔试难点如下<ul>
 <li>c++处理png环境搭建，需要依赖libpng和zlib</li>
 <li>使用RAII的思想处理损坏的PNG图片</li>
 <li>在类中使用多线程时通过<code>bind</code>函数避免将普通成员函数定义为static</li>
 </ul>
 </li>
+<li>2021年3月29日一面，难度很高，问得非常底层<ul>
+<li>类对象的空指针调用普通成员函数和虚函数的区别</li>
+<li>在栈区申请大块内存会有什么风险<ul>
+<li>可能导致栈溢出</li>
+</ul>
+</li>
+<li>在堆区申请大块内存的<code>brk</code>和<code>mmap</code>有什么不同，具体解释mmap</li>
+<li>64位操作系统内存对齐，short、float、double所占的字节数</li>
+<li>不使用互斥量实现锁</li>
+<li>矩阵计算如何用多线程加速</li>
+<li>一个在epoll中注册为写事件的套接字被读取，会发生什么</li>
+<li>遍历同样长度的vector和list，为什么前者比较快<ul>
+<li>vector在内存中的地址连续，访问方便；list需要从当前节点获取下一节点的地址</li>
+<li>从cpu来说，vector因为连续的地址，访问命中率跟高</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>volatile关键字的作用</li>
 </ul>
 </li>
 <li><p>谷歌</p>
@@ -873,6 +1403,10 @@ int main() &#123;
 <ul>
 <li>2021年3月12日官网投递，账号：18968170679，验证码登陆</li>
 <li>招聘进展：<a target="_blank" rel="noopener" href="https://careers.pinduoduo.com/campus/personal-center">https://careers.pinduoduo.com/campus/personal-center</a></li>
+<li>2021年4月9日笔试，0.6/4，确实难<ul>
+<li><a target="_blank" rel="noopener" href="https://www.nowcoder.com/discuss/636123?channel=-1&amp;source_id=subject_nctrack">https://www.nowcoder.com/discuss/636123?channel=-1&amp;source_id=subject_nctrack</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><p>滴滴</p>
@@ -884,8 +1418,53 @@ int main() &#123;
 </li>
 <li><p>商汤</p>
 <ul>
-<li>2021年3月11日官网投递，账号：18968170679密码：zt008551</li>
-<li>招聘进展：<a target="_blank" rel="noopener" href="https://hr.sensetime.com/delivery/record?channel=1">https://hr.sensetime.com/delivery/record?channel=1</a></li>
+<li><p>2021年3月11日官网投递，账号：18968170679密码：zt008551</p>
+</li>
+<li><p>招聘进展：<a target="_blank" rel="noopener" href="https://hr.sensetime.com/delivery/record?channel=1">https://hr.sensetime.com/delivery/record?channel=1</a></p>
+</li>
+<li><p>2021年3月30日进行了一面，面试持续了1小时，是目前为止面试最久的</p>
+<ul>
+<li><p>Shared_ptr是否线程安全</p>
+</li>
+<li><p>引用计数是否线程安全</p>
+</li>
+<li><p><code>map</code>和<code>unordered_map</code>的区别和选择</p>
+</li>
+<li><p>C++程序编译的过程</p>
+</li>
+<li><p><code>priority_queue</code>的底层实现</p>
+<ul>
+<li><p>基于vecotr实现，是一个容器适配器</p>
+</li>
+<li><blockquote>
+<p>除了顺序容器之外，标准库还定义了三个顺序容器适配器：stack、queue和priority_queue。适配器是标准库中的一个通用概念。</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>STL中除了容器还有什么</p>
+<ul>
+<li>总共有6大组件</li>
+</ul>
+</li>
+<li><p>重载和重写的区别</p>
+</li>
+<li><p>undefined reference to</p>
+</li>
+<li><p>编程题1，删除vector中等于target的值</p>
+<ul>
+<li>技巧在于使用<code>erase</code>函数的返回值减少迭代器自加的次数</li>
+</ul>
+</li>
+<li><p>编程题2，leetcode <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/palindrome-permutation-lcci/">面试题 01.04. 回文排列</a></p>
+</li>
+</ul>
+</li>
+<li><p>2021年4月1日进行了二面，持续大概半小时</p>
+<ul>
+<li>全程聊项目</li>
+</ul>
+</li>
 </ul>
 </li>
 <li><p>旷世</p>
@@ -906,19 +1485,89 @@ int main() &#123;
 </li>
 <li><p>momenta</p>
 <ul>
-<li>2021年3月13日<a href="mailto:&#119;&#117;&#121;&#97;&#107;&#117;&#110;&#64;&#109;&#x6f;&#109;&#101;&#110;&#x74;&#97;&#46;&#x61;&#x69;">&#119;&#117;&#121;&#97;&#107;&#117;&#110;&#64;&#109;&#x6f;&#109;&#101;&#110;&#x74;&#97;&#46;&#x61;&#x69;</a>内推</li>
-<li>2021年3月16日HR通过微信联系我，安排两天三面</li>
+<li><p>2021年3月13日<a href="mailto:&#x77;&#x75;&#x79;&#97;&#107;&#117;&#110;&#x40;&#109;&#x6f;&#x6d;&#x65;&#110;&#116;&#x61;&#46;&#97;&#x69;">&#x77;&#x75;&#x79;&#97;&#107;&#117;&#110;&#x40;&#109;&#x6f;&#x6d;&#x65;&#110;&#116;&#x61;&#46;&#97;&#x69;</a>内推</p>
+</li>
+<li><p>2021年3月16日HR通过微信联系我，安排两天三面</p>
+</li>
+<li><p>2021年3月25日进行了两场面试</p>
+<ul>
+<li><p>第一场面试，上来就编程，花了10分钟把题目做了，然后开始问基础，项目基本没问，只记得那些我没回答出来的问题了</p>
+<ul>
+<li>编程题：leetcode223.「矩形面积」</li>
+<li>跳表的概念<ul>
+<li><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/9d8296562806">https://www.jianshu.com/p/9d8296562806</a></li>
 </ul>
 </li>
-<li><p>蔚来</p>
-<ul>
-<li>仅招聘暑期实习生，放弃投递</li>
+<li>对数据库是否了解</li>
 </ul>
 </li>
-<li><p>搜狗</p>
+<li><p>第二场面试，也是一样的套路，先做一道题再开始面试，项目和基础都问了，只记得答得不够好的问题</p>
 <ul>
-<li>2021年3月17日官网投递，MOKA微信登陆</li>
-<li>招聘进展：<a target="_blank" rel="noopener" href="https://app.mokahr.com/campus_apply/sogou-inc01/104#/candidateHome/applications">https://app.mokahr.com/campus_apply/sogou-inc01/104#/candidateHome/applications</a></li>
+<li><p>编程题：leetcode142.「环形链表II」</p>
+</li>
+<li><p><code>std::move</code>的作用</p>
+<ul>
+<li><code>unique_ptr</code>所有权的转移</li>
+<li>左值到右值属性的转移</li>
+</ul>
+</li>
+<li><p><code>std::forward</code>的作用</p>
+<ul>
+<li><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/353403945">https://zhuanlan.zhihu.com/p/353403945</a></p>
+</li>
+<li><p>右值引用是左值</p>
+</li>
+<li><p><code>std::forward</code>必须配合模板使用，只有在模板参数下<code>T&amp;&amp;</code>才能触发引用折叠</p>
+</li>
+<li><p>可以在构造函数中精简代码</p>
+</li>
+<li><pre><code class="cpp">////&lt; @note std::move
+void construct_foo_by(Foo&amp;&amp; rhs) &#123; 
+   Foo foo(std::move(rhs));
+&#125;
+
+void construct_foo_by(const Foo&amp; rhs) &#123; 
+    Foo foo(rhs);
+&#125;
+
+int main(int argc, char const *argv[]) &#123;
+    Foo foo(10);
+    construct_foo_by(foo);      // 调用 ctor
+    construct_foo_by(Foo&#123;100&#125;); // 调用 mtor
+    return 0;
+&#125;
+
+////&lt; @note std::forward
+template&lt;typename T&gt; 
+void create_foo_by(T&amp;&amp; rhs) &#123; 
+    Foo foo(std::forward&lt;T&amp;&amp;&gt;(rhs));
+&#125;
+
+int main(int argc, char const *argv[]) &#123;
+    Foo foo(10);
+
+    create_foo_by(foo);   // ctor
+    create_foo_by(Foo&#123;100&#125;); // mtor
+
+    return 0;
+&#125;
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">      - 虚函数表中除了虚函数的地址还有什么内容</span><br><span class="line">        </span><br><span class="line">        - 取决于编译器，如用于RTTI(RunTime Type Identification)的type_info类型。或者直接将虚基类的指针存放在虚表中。</span><br><span class="line">        - RTTI是RunTime Type Identification的缩写，意思是运行时类型识别。C++引入这个机制是为了让程序在运行时能根据基类的指针或引用来获得该指针或引用所指的对象的实际类型。但是现在RTTI的类型识别已经不限于此了，它还能通过typeid操作符识别出所有的基本类型（int，指针等）的变量对应的类型。</span><br><span class="line">        </span><br><span class="line">      - C++并发编程有哪些常见操作</span><br><span class="line">        </span><br><span class="line">        - future、notify_one、async、condition_variable</span><br><span class="line">        </span><br><span class="line">      - 线程安全的容器</span><br><span class="line">        </span><br><span class="line">        - STL容器不是线程安全的</span><br><span class="line">        </span><br><span class="line">      - deque是否内存连续</span><br><span class="line">        </span><br><span class="line">        - 不连续，deque的内存以分段连续的方式存储</span><br><span class="line">        </span><br><span class="line">      - git的操作</span><br><span class="line"></span><br><span class="line">  - 2021年3月26日第三场面试</span><br><span class="line"></span><br><span class="line">    - 模板类</span><br><span class="line"></span><br><span class="line">      - 由类模板实例化得到的类叫模板类</span><br><span class="line"></span><br><span class="line">    - 如何自己实现锁</span><br><span class="line"></span><br><span class="line">    - 设计模式-工厂模式</span><br><span class="line"></span><br><span class="line">      - &gt; 一个简单工厂类，它可以根据参数的不同返回不同类的实例，被创建的实例通常都具有共同的父类</span><br><span class="line"></span><br><span class="line">      - https:&#x2F;&#x2F;blog.csdn.net&#x2F;sinat_21107433&#x2F;article&#x2F;details&#x2F;102598181</span><br><span class="line">    </span><br><span class="line">  - 2021年4月1日第四场面试，也就是实际意义上的二面</span><br><span class="line"></span><br><span class="line">    - 25分钟聊项目</span><br><span class="line">    - 10分钟聊人生</span><br><span class="line">    </span><br><span class="line">  - 2021年4月8日安排了终面</span><br><span class="line"></span><br><span class="line">    - 自我介绍</span><br><span class="line">    - 聊项目</span><br><span class="line">    - 智力题：粗略估计杭州有多少理发师</span><br><span class="line">      - 杭州人口\*每个人理发的频率&#x2F;理发师的剪发效率</span><br><span class="line">    </span><br><span class="line">  - 2021年4月15日HR面</span><br><span class="line"></span><br><span class="line">    - 询问拿到了哪些offer，期望薪资</span><br><span class="line"></span><br><span class="line">- 蔚来</span><br><span class="line"></span><br><span class="line">  - 仅招聘暑期实习生，放弃投递</span><br><span class="line"></span><br><span class="line">- 搜狗</span><br><span class="line"></span><br><span class="line">  - 2021年3月17日官网投递，MOKA微信登陆</span><br><span class="line"></span><br><span class="line">  - 招聘进展：https:&#x2F;&#x2F;app.mokahr.com&#x2F;campus_apply&#x2F;sogou-inc01&#x2F;104#&#x2F;candidateHome&#x2F;applications</span><br><span class="line"></span><br><span class="line">  - 2021年4月7日一面，难以形容的感觉，可能挂可能不挂。。。</span><br><span class="line"></span><br><span class="line">    - 自我介绍</span><br><span class="line"></span><br><span class="line">    - vector的底层实现以及如何清除掉vector占据的内存空间</span><br><span class="line"></span><br><span class="line">      - swap()是交换函数，使vector离开其自身的作用域，从而强制释放vector所占的内存空间，释放vector内存最简单的方法是&#96;vector&lt;int&gt;().swap(intVec)&#96;</span><br><span class="line"></span><br><span class="line">    - OOM不产生core文件，如何debug</span><br><span class="line"></span><br><span class="line">      - 详见cpp面试题汇总</span><br><span class="line"></span><br><span class="line">    - 编程题：[409. 最长回文串](https:&#x2F;&#x2F;leetcode-cn.com&#x2F;problems&#x2F;longest-palindrome&#x2F;)</span><br><span class="line"></span><br><span class="line">    - 编程题：[470. 用 Rand7() 实现 Rand10()](https:&#x2F;&#x2F;leetcode-cn.com&#x2F;problems&#x2F;implement-rand10-using-rand7&#x2F;)</span><br><span class="line"></span><br><span class="line">    - 思考题：用rand6()产生rand10()</span><br><span class="line"></span><br><span class="line">    - &#96;&#96;&#96;cpp</span><br><span class="line">      int rand10() &#123;</span><br><span class="line">          int x &#x3D; 0;</span><br><span class="line">          do &#123;</span><br><span class="line">              x &#x3D; rand6()*6 + rand6();</span><br><span class="line">          &#125; while (x &gt;&#x3D; 30);</span><br><span class="line">          return x % 10;</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure></code></pre>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>2021年4月13日二面</p>
+<ul>
+<li>聊项目</li>
+<li>UDP如何实现可靠传输、如何做流量控制</li>
+<li>C++创建一个类(1.只能在堆上创建； 2 只能在栈上创建； 3 不能被继承(堆上和栈上都可以创建))</li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42837885/article/details/101156049">https://blog.csdn.net/qq_42837885/article/details/101156049</a></li>
+<li>全都答出来了，但还是挂了，莫名其妙。。。</li>
+</ul>
+</li>
 </ul>
 </li>
 <li><p>爱奇艺</p>
@@ -931,6 +1580,7 @@ int main() &#123;
 <ul>
 <li>2021年3月18日官网投递，账号：18968170679，密码：123456</li>
 <li>招聘进展：<a target="_blank" rel="noopener" href="https://hr.sangfor.com/personalCenter">https://hr.sangfor.com/personalCenter</a></li>
+<li>2021年3月24日笔试，但由于和祝暾、若希、境心约饭，放弃笔试</li>
 </ul>
 </li>
 <li><p>IBM</p>
@@ -940,10 +1590,111 @@ int main() &#123;
 </ul>
 </li>
 <li><p>Bigo</p>
-</li>
-<li><p>未完待续</p>
+<ul>
+<li>2021年3月24日官网投递，微信MOKA登陆</li>
+<li>招聘进展：<a target="_blank" rel="noopener" href="https://app.mokahr.com/campus_apply/bigo/1018#/candidateHome/applications">https://app.mokahr.com/campus_apply/bigo/1018#/candidateHome/applications</a></li>
+</ul>
 </li>
 </ul>
+<h2 id="offer情况"><a href="#offer情况" class="headerlink" title="offer情况"></a>offer情况</h2><p>浙大水硕，去年秋招拿到了阿里和华为15级的offer，春招继续面，目前为止拿到了如下offer。</p>
+<ul>
+<li>阿里</li>
+<li>华为</li>
+<li>商汤科技</li>
+<li>OPPO</li>
+<li>海康威视</li>
+<li>恒生电子</li>
+<li>momenta</li>
+</ul>
+<p>等待oc</p>
+<ul>
+<li>快手</li>
+<li>小米</li>
+</ul>
+<p>以上offer除了阿里是算法岗，其他都是c++开发岗，另外字节也进面了，但是已经不想面了，就拒绝了面试安排。到此我的校招差不多结束了，写个知乎回答算是给自己的研究生生涯一个交代。</p>
+<h2 id="时间线"><a href="#时间线" class="headerlink" title="时间线"></a>时间线</h2><p><strong>商汤科技</strong></p>
+<p>2021年03月11日官网投递</p>
+<p>2021年03月30日一面</p>
+<p>2021年04月01日二面</p>
+<p>2021年04月01日HR面</p>
+<p>2021年04月13日录用通知书</p>
+<p><strong>快手</strong></p>
+<p>2021年04月01日官网投递</p>
+<p>2021年04月10日一面</p>
+<p>2021年04月12日二面</p>
+<p>2021年04月13日三面</p>
+<p>2021年04月15日HR面</p>
+<p>等待oc</p>
+<p><strong>OPPO</strong></p>
+<p>2021年03月01日官网投递</p>
+<p>2021年03月24日一面</p>
+<p>2021年03月26日二面</p>
+<p>2021年03月31日HR面</p>
+<p>2021年04月03日录用通知书</p>
+<p><strong>海康威视</strong></p>
+<p>2021年03月03日官网投递</p>
+<p>2021年03月30日一面</p>
+<p>2021年03月31日二面</p>
+<p>2021年04月07日HR面</p>
+<p>2021年04月09日录用通知书</p>
+<p><strong>momenta</strong></p>
+<p>2021年03月13日通过momenta招聘邮箱投递</p>
+<p>2021年03月025日一面</p>
+<p>2021年04月01日二面</p>
+<p>2021年04月08日三面</p>
+<p>2021年04月15日HR面</p>
+<p>2021年04月20日OC</p>
+<p><strong>恒生电子</strong></p>
+<p>2021年03月02日官网投递</p>
+<p>2021年03月11日一面</p>
+<p>2021年03月15日二面</p>
+<p>2021年03月18日录用通知书</p>
+<p><strong>小米</strong></p>
+<p>2021年03月29日官网投递</p>
+<p>2021年04月12日一面</p>
+<p>2021年04月17日二面</p>
+<p>2021年04月26日三面</p>
+<p>等待OC</p>
+<h2 id="学习路线"><a href="#学习路线" class="headerlink" title="学习路线"></a>学习路线</h2><p>插一张书本的照片</p>
+<p><strong>C++基础</strong></p>
+<ul>
+<li>《C++ Primer（第五版）》</li>
+<li>《Effective C++》侯捷著</li>
+<li>《深度探索C++对象模型》侯捷译</li>
+<li>《STL源码剖析》侯捷著</li>
+</ul>
+<p>上述这几本书可以说是C++学习必读书目，面试问C++基础逃不出这几本书，建议认真阅读一遍。设计模式方面掌握工厂模式、观察者模式和单例模式能够应付大部分面试了。</p>
+<p><strong>网络编程</strong></p>
+<ul>
+<li>《TCP/IP网络编程》尹圣雨著</li>
+<li>《Linux高性能服务器编程》游双著</li>
+<li>《Linux多线程服务端编程》陈硕著</li>
+</ul>
+<p>上述三本书按照难度和学习顺序排列，第一本书是一个韩国人写的，很基础适合入门，后面两本书是C++服务器开发的进阶书籍</p>
+<p><strong>操作系统</strong></p>
+<ul>
+<li>《深入理解计算机系统》CSAPP</li>
+<li>《现代操作系统（第二版）》</li>
+</ul>
+<p>操作系统学习书籍不用多说CSAPP永远的经典</p>
+<p><strong>数据库</strong></p>
+<ul>
+<li>《MySQL必知必会》</li>
+<li>B站一天学会MySQL</li>
+</ul>
+<p>第一本书是由浅入深的学习书籍，如果嫌看书太慢，可以直接去b站根据关键词“一天学会MySQL”进行搜索，几个视频都挺不错的</p>
+<p><strong>数据结构</strong></p>
+<ul>
+<li>《剑指offer》</li>
+<li>力扣前300题</li>
+</ul>
+<p>数据结构方面《剑指offer》必刷，力扣前300题尽量也全部过一遍，面试手撕很多原题都出自这里。力扣官网上有一个学习专区，很多leetbook值得一看，会员的话可以淘宝上买一个，价格很便宜。刷题语言建议主力开发语言是什么就用什么，很多人会说用python刷题会快，我也尝试过，但刷题更讲究思路而不是语言，总体试下来C++和python差不多，反而在刷题过程中我能够更进一步熟悉C++的语言特性。</p>
+<p><strong>简历制作</strong></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/CyC2018/Markdown-Resume">https://github.com/CyC2018/Markdown-Resume</a></p>
+<p>我用的简历模板是上面这个，最终生成一个一页纸的PDF（侵删）</p>
+<h2 id="一些感想"><a href="#一些感想" class="headerlink" title="一些感想"></a>一些感想</h2><p>插入一张日程图</p>
+<p>春招正好和毕业论文撞车，整个过程比较繁忙，最高峰一天三面还要赶论文，一天下来手是抖的。春招采取的策略是海投，基本上有点名气的互联网公司都投了一遍，岗位是C++后台开发、搜广推引擎开发、高性能服务器开发等，这里也建议大家多投一些公司，在面试当中能获得极快的成长，跟面试官频繁对线能促使自己更进一步的理解技术，不要怕挂。另外投简历时尽量找内推，牛客网上有很多内推相关的帖子，通过内推可以加快简历筛选。总体来说春招的机会还是比秋招少一些，很多公司投递简历之后就没有下文了，如果可以尽量秋招上岸。祝大家都有一个理想的offer！</p>
+<p>2021年4月29日完结撒花</p>
 
       
 
@@ -1531,81 +2282,10 @@ int main() &#123;
 
 
   
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/10/07/hello-world/">Hello World</a>
-    </h1>
-  
-
-        
-        <a href="/2020/10/07/hello-world/" class="archive-article-date">
-  	<time datetime="2020-10-07T08:05:26.120Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/10/07/hello-world/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
+    </nav>
   
 
 
@@ -1761,6 +2441,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">-c++知识点</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">快速排序</a>
               </li>
             
             <div class="clearfix"></div>
